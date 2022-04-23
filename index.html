@@ -32,7 +32,7 @@
           <img src="images/elements/karachaevsk.jpg" alt="" class="element__image" />
           <div class="element__description">
             <div class="element__name">Карачаевск</div>
-            <div class="element__like_active"></div>
+            <div class="element__like element__like_active"></div>
           </div>
         </div>
         <div class="element">
@@ -82,8 +82,22 @@
           <div class="popup__close"></div>
           <p class="popup__title">Редактировать профиль</p>
           <form action="" class="popup__form">
-            <input type="text" placeholder="Имя" name="name" id="" class="popup__input" />
-            <input type="text" placeholder="О себе" name="description" id="" class="popup__input" />
+            <input
+              type="text"
+              id="profile-name"
+              placeholder="Имя"
+              name="name"
+              id=""
+              class="popup__input"
+            />
+            <input
+              type="text"
+              id="profile-description"
+              placeholder="О себе"
+              name="description"
+              id=""
+              class="popup__input"
+            />
             <button type="submit" class="popup__button">Сохранить</button>
           </form>
         </div>
