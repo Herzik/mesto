@@ -2,6 +2,8 @@ function openCloseModalWindow() {
   const popupWindow = document.querySelector('.popup')
 
   popupWindow.classList.toggle('popup_active')
+  popupWindow.classList.toggle('fade-in')
+  popupWindow.classList.toggle('fade-out')
 }
 
 function manipulationModalWindow() {
