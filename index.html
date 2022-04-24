@@ -15,7 +15,7 @@
     <main class="main">
       <div class="line"></div>
 
-      <section class="profile">
+      <div class="profile">
         <div class="profile__info">
           <img src="images/avatar.png" alt="" class="profile__avatar" />
           <div class="profile__name-wrapper">
@@ -25,13 +25,13 @@
           </div>
         </div>
         <button class="profile__add-button"></button>
-      </section>
+      </div>
 
-      <section class="elements">
+      <div class="elements">
         <div class="element">
           <img src="images/elements/karachaevsk.jpg" alt="" class="element__image" />
           <div class="element__description">
-            <div class="element__name">Карачаевск</div>
+            <p class="element__name">Карачаевск</p>
             <div class="element__like element__like_non-active"></div>
           </div>
         </div>
@@ -39,39 +39,39 @@
           <img src="images/elements/elbrus.jpg" alt="" class="element__image" />
 
           <div class="element__description">
-            <div class="element__name">Гора Эльбрус</div>
+            <p class="element__name">Гора Эльбрус</p>
             <div class="element__like element__like_non-active"></div>
           </div>
         </div>
         <div class="element">
           <img src="images/elements/dombai.jpg" alt="" class="element__image" />
           <div class="element__description">
-            <div class="element__name">Домбай</div>
+            <p class="element__name">Домбай</p>
             <div class="element__like element__like_non-active"></div>
           </div>
         </div>
         <div class="element">
           <img src="images/elements/elbrus.jpg" alt="" class="element__image" />
           <div class="element__description">
-            <div class="element__name">Гора Эльбрус</div>
+            <p class="element__name">Гора Эльбрус</p>
             <div class="element__like element__like_non-active"></div>
           </div>
         </div>
         <div class="element">
           <img src="images/elements/dombai.jpg" alt="" class="element__image" />
           <div class="element__description">
-            <div class="element__name">Домбай</div>
+            <p class="element__name">Домбай</p>
             <div class="element__like element__like_non-active"></div>
           </div>
         </div>
         <div class="element">
           <img src="images/elements/karachaevsk.jpg" alt="" class="element__image" />
           <div class="element__description">
-            <div class="element__name">Карачаевск</div>
+            <p class="element__name">Карачаевск</p>
             <div class="element__like element__like_non-active"></div>
           </div>
         </div>
-      </section>
+      </div>
 
       <footer class="footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
@@ -81,13 +81,12 @@
         <div class="popup__window">
           <div class="popup__close"></div>
           <p class="popup__title">Редактировать профиль</p>
-          <form action="" class="popup__form">
+          <form action="form" class="popup__form">
             <input
               type="text"
               id="profile-name"
               placeholder="Имя"
               name="name"
-              id=""
               class="popup__input"
             />
             <input
@@ -95,7 +94,6 @@
               id="profile-description"
               placeholder="О себе"
               name="description"
-              id=""
               class="popup__input"
             />
             <button type="submit" class="popup__button">Сохранить</button>

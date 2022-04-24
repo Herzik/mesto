@@ -1,12 +1,12 @@
 .fade-in {
-  animation: fadeIn ease 1s;
-  -webkit-animation: fadeIn ease 1s;
-  -moz-animation: fadeIn ease 1s;
-  -o-animation: fadeIn ease 1s;
-  -ms-animation: fadeIn ease 1s;
+  animation: fadein ease 1s;
+  -webkit-animation: fadein ease 1s;
+  -moz-animation: fadein ease 1s;
+  -o-animation: fadein ease 1s;
+  -ms-animation: fadein ease 1s;
 }
 
-@keyframes fadeIn {
+@keyframes fadein {
   0% {
     opacity: 0;
   }
@@ -15,7 +15,7 @@
   }
 }
 
-@-moz-keyframes fadeIn {
+@-moz-keyframes fadein {
   0% {
     opacity: 0;
   }
@@ -24,7 +24,7 @@
   }
 }
 
-@-webkit-keyframes fadeIn {
+@-webkit-keyframes fadein {
   0% {
     opacity: 0;
   }
@@ -33,7 +33,7 @@
   }
 }
 
-@-o-keyframes fadeIn {
+@-o-keyframes fadein {
   0% {
     opacity: 0;
   }
@@ -42,7 +42,7 @@
   }
 }
 
-@-ms-keyframes fadeIn {
+@-ms-keyframes fadein {
   0% {
     opacity: 0;
   }

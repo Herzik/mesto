@@ -1,12 +1,12 @@
 .fade-out {
-  animation: fadeOut ease 1s;
-  -webkit-animation: fadeOut ease 1s;
-  -moz-animation: fadeOut ease 1s;
-  -o-animation: fadeOut ease 1s;
-  -ms-animation: fadeOut ease 1s;
+  animation: fadeout ease 1s;
+  -webkit-animation: fadeout ease 1s;
+  -moz-animation: fadeout ease 1s;
+  -o-animation: fadeout ease 1s;
+  -ms-animation: fadeout ease 1s;
 }
 
-@keyframes fadeOut {
+@keyframes fadeout {
   0% {
     opacity: 1;
   }
@@ -15,7 +15,7 @@
   }
 }
 
-@-moz-keyframes fadeOut {
+@-moz-keyframes fadeout {
   0% {
     opacity: 1;
   }
@@ -24,7 +24,7 @@
   }
 }
 
-@-webkit-keyframes fadeOut {
+@-webkit-keyframes fadeout {
   0% {
     opacity: 1;
   }
@@ -33,7 +33,7 @@
   }
 }
 
-@-o-keyframes fadeOut {
+@-o-keyframes fadeout {
   0% {
     opacity: 1;
   }
@@ -42,7 +42,7 @@
   }
 }
 
-@-ms-keyframes fadeOut {
+@-ms-keyframes fadeout {
   0% {
     opacity: 1;
   }
