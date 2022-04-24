@@ -1,0 +1,7 @@
+.element__like_non-active {
+  background-image: url('../../../../images/elements/like/like.svg');
+}
+
+.element__like_non-active:hover {
+  background-image: url('../../../../images/elements/like/like-hover.svg');
+}

@@ -33,6 +33,21 @@ function editProfile() {
   })
 }
 
-manipulationModalWindow()
+function likedElemen() {
+  const elementsWrapper = document.querySelector('.elements')
 
+  const elementLike = document.querySelectorAll('.element__like')
+
+  elementsWrapper.addEventListener('click', (e) => {
+    let target = e.target
+
+    if (target.classList.contains('element__like')) {
+      target.classList.toggle('element__like_non-active')
+      target.classList.toggle('element__like_active')
+    }
+  })
+}
+
+manipulationModalWindow()
 editProfile()
+likedElemen()
