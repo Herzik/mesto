@@ -4,7 +4,8 @@
   font-weight: 500;
   font-size: 27px;
   line-height: 1.4;
-  margin: 0 auto;
+  margin: 0;
+  margin-left: 44px;
   max-width: 190px;
   text-overflow: ellipsis;
   white-space: nowrap;

@@ -9,98 +9,96 @@
   </head>
   <body class="page">
     <header class="header">
-      <img src="images/logo.png" alt="логотип" class="header__logo" />
+      <img src="images/logo.svg" alt="логотип" class="header__logo" />
     </header>
 
     <main class="main">
-      <div class="line"></div>
-
-      <div class="profile">
+      <section class="profile">
         <div class="profile__info">
-          <img src="images/avatar.png" alt="" class="profile__avatar" />
-          <div class="profile__name-wrapper">
-            <p class="profile__name">Жак-Ив Кусто</p>
+          <img src="images/avatar.png" alt="фотография" class="profile__avatar" />
+          <div class="profile__wrapper">
+            <div class="porfile__name-block">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button type="button" class="profile__edit-icon"></button>
+            </div>
             <p class="profile__description">Исследователь океана</p>
-            <button class="profile__edit-icon"></button>
           </div>
         </div>
-        <button class="profile__add-button"></button>
-      </div>
+        <button type="button" class="profile__add-button"></button>
+      </section>
 
-      <div class="elements">
+      <section class="elements">
         <div class="element">
-          <img src="images/elements/karachaevsk.jpg" alt="" class="element__image" />
+          <img src="images/elements/karachaevsk.jpg" alt="Карачаевск" class="element__image" />
           <div class="element__description">
-            <p class="element__name">Карачаевск</p>
-            <div class="element__like element__like_non-active"></div>
+            <h2 class="element__name">Карачаевск</h2>
+            <button class="element__like element__like_non-active"></button>
           </div>
         </div>
-        <div class="element">
-          <img src="images/elements/elbrus.jpg" alt="" class="element__image" />
 
-          <div class="element__description">
-            <p class="element__name">Гора Эльбрус</p>
-            <div class="element__like element__like_non-active"></div>
-          </div>
-        </div>
         <div class="element">
-          <img src="images/elements/dombai.jpg" alt="" class="element__image" />
+          <img src="images/elements/elbrus.jpg" alt="Эльбрус" class="element__image" />
           <div class="element__description">
-            <p class="element__name">Домбай</p>
-            <div class="element__like element__like_non-active"></div>
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button class="element__like element__like_non-active"></button>
           </div>
         </div>
-        <div class="element">
-          <img src="images/elements/elbrus.jpg" alt="" class="element__image" />
-          <div class="element__description">
-            <p class="element__name">Гора Эльбрус</p>
-            <div class="element__like element__like_non-active"></div>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/elements/dombai.jpg" alt="" class="element__image" />
-          <div class="element__description">
-            <p class="element__name">Домбай</p>
-            <div class="element__like element__like_non-active"></div>
-          </div>
-        </div>
-        <div class="element">
-          <img src="images/elements/karachaevsk.jpg" alt="" class="element__image" />
-          <div class="element__description">
-            <p class="element__name">Карачаевск</p>
-            <div class="element__like element__like_non-active"></div>
-          </div>
-        </div>
-      </div>
 
-      <footer class="footer">
-        <p class="footer__copyright">© 2020 Mesto Russia</p>
-      </footer>
-
-      <div class="popup fade-out">
-        <div class="popup__window">
-          <div class="popup__close"></div>
-          <p class="popup__title">Редактировать профиль</p>
-          <form action="form" class="popup__form">
-            <input
-              type="text"
-              id="profile-name"
-              placeholder="Имя"
-              name="name"
-              class="popup__input"
-            />
-            <input
-              type="text"
-              id="profile-description"
-              placeholder="О себе"
-              name="description"
-              class="popup__input"
-            />
-            <button type="submit" class="popup__button">Сохранить</button>
-          </form>
+        <div class="element">
+          <img src="images/elements/dombai.jpg" alt="Домбай" class="element__image" />
+          <div class="element__description">
+            <h2 class="element__name">Домбай</h2>
+            <button class="element__like element__like_non-active"></button>
+          </div>
         </div>
-      </div>
+
+        <div class="element">
+          <img src="images/elements/elbrus.jpg" alt="Эльбрус" class="element__image" />
+          <div class="element__description">
+            <h2 class="element__name">Гора Эльбрус</h2>
+            <button class="element__like element__like_non-active"></button>
+          </div>
+        </div>
+
+        <div class="element">
+          <img src="images/elements/dombai.jpg" alt="Домбай" class="element__image" />
+          <div class="element__description">
+            <h2 class="element__name">Домбай</h2>
+            <button class="element__like element__like_non-active"></button>
+          </div>
+        </div>
+
+        <div class="element">
+          <img src="images/elements/karachaevsk.jpg" alt="Карачаевск" class="element__image" />
+          <div class="element__description">
+            <h2 class="element__name">Карачаевск</h2>
+            <button class="element__like element__like_non-active"></button>
+          </div>
+        </div>
+      </section>
     </main>
-    <script src="pages/index.js"></script>
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+
+    <div class="popup fade-out">
+      <div class="popup__window">
+        <button class="popup__close"></button>
+        <h3 class="popup__title">Редактировать профиль</h3>
+        <form name="popup-form" action="form" class="popup__form">
+          <input type="text" id="profile-name" placeholder="Имя" name="name" class="popup__input" />
+          <input
+            type="text"
+            id="profile-description"
+            placeholder="О себе"
+            name="description"
+            class="popup__input"
+          />
+          <button type="submit" class="popup__button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script/index.js"></script>
   </body>
 </html>
