@@ -1,12 +1,12 @@
 .header {
   margin-top: 26px;
-  height: 56px;
+  min-height: 56px;
   border-bottom: 1px solid #545454;
 }
 
 @media screen and (min-width: 1024px) {
   .header {
-    height: 74px;
+    min-height: 74px;
     margin: 45px 70px 0 70px;
   }
 }
