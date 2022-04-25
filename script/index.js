@@ -10,34 +10,30 @@ const popupForm = document.querySelector('.popup__form')
 
 const elementsWrapper = document.querySelector('.elements')
 
-function openCloseModalWindow() {
-  popupWindow.classList.toggle('popup_active')
-  popupWindow.classList.toggle('fade-in')
-  popupWindow.classList.toggle('fade-out')
+function openModalWindow() {
+  popupWindow.classList.add('popup_active')
+  popupWindow.classList.add('fade-in')
+  popupWindow.classList.remove('fade-out')
 
   inputName.value = profileName.textContent
   inputDescription.value = profileDescription.textContent
 }
 
-profileEditButton.addEventListener('click', openCloseModalWindow)
-
-popupCloseButton.addEventListener('click', openCloseModalWindow)
+function closeModalWindow() {
+  popupWindow.classList.remove('popup_active')
+  popupWindow.classList.remove('fade-in')
+  popupWindow.classList.add('fade-out')
+}
 
 function editProfile(event) {
   event.preventDefault()
   profileName.textContent = inputName.value
   profileDescription.textContent = inputDescription.value
-  openCloseModalWindow()
+  closeModalWindow()
 }
+
+profileEditButton.addEventListener('click', openModalWindow)
+
+popupCloseButton.addEventListener('click', closeModalWindow)
 
 popupForm.addEventListener('submit', editProfile)
-
-function likedElement(event) {
-  let target = event.target
-  if (target.classList.contains('element__like')) {
-    target.classList.toggle('element__like_non-active')
-    target.classList.toggle('element__like_active')
-  }
-}
-
-elementsWrapper.addEventListener('click', likedElement)
