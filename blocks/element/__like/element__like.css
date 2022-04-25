@@ -1,5 +1,5 @@
 .element__like {
-  background-image: url('../../../../images/elements/like/like.svg');
+  background-image: url('../../../images/elements/like/like.svg');
   border: none;
   background-color: transparent;
   cursor: pointer;
