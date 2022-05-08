@@ -1,9 +1,9 @@
 .fade-in {
-  animation: fadein ease 1s;
-  -webkit-animation: fadein ease 1s;
-  -moz-animation: fadein ease 1s;
-  -o-animation: fadein ease 1s;
-  -ms-animation: fadein ease 1s;
+  animation: fadein ease 0.7s;
+  -webkit-animation: fadein ease 0.7s;
+  -moz-animation: fadein ease 0.7s;
+  -o-animation: fadein ease 0.7s;
+  -ms-animation: fadein ease 0.7s;
 }
 
 @keyframes fadein {
