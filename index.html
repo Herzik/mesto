@@ -27,10 +27,7 @@
         <button type="button" class="profile__add-button"></button>
       </section>
 
-      <section class="elements">
-       
-        </div>
-      </section>
+      <section class="elements"></section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
@@ -40,7 +37,11 @@
       <div class="popup__window">
         <button class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form name="popup-form-type-profile" action="form" class="popup__form popup__form_type_profile">
+        <form
+          name="popup-form-type-profile"
+          action="form"
+          class="popup__form popup__form_type_profile"
+        >
           <input type="text" id="profile-name" placeholder="Имя" name="name" class="popup__input" />
           <input
             type="text"
@@ -58,8 +59,18 @@
       <div class="popup__window">
         <button class="popup__close"></button>
         <h3 class="popup__title">Новое место</h3>
-        <form name="popup-form-type-card" action="form" class="popup__form popup__form_type_add-card">
-          <input type="text" id="place-name" placeholder="Название" name="place-name" class="popup__input" />
+        <form
+          name="popup-form-type-card"
+          action="form"
+          class="popup__form popup__form_type_add-card"
+        >
+          <input
+            type="text"
+            id="place-name"
+            placeholder="Название"
+            name="place-name"
+            class="popup__input"
+          />
           <input
             type="text"
             id="place-link"
@@ -75,16 +86,14 @@
     <div class="popup popup_type_card-image">
       <div class="popup__window popup__window_type_card-image">
         <button class="popup__close popup__close_type_card-image"></button>
-        <img src="" alt="" class="popup__card-image">
+        <img src="#" alt="#" class="popup__card-image" />
         <p class="popup__card-title"></p>
       </div>
-
-      
     </div>
 
     <template id="card-template">
       <div class="element">
-        <img src="" alt="" class="element__image" />
+        <img src="#" alt="#" class="element__image" />
         <div class="element__description">
           <h2 class="element__name"></h2>
           <button class="element__like"></button>
@@ -93,9 +102,6 @@
       </div>
     </template>
 
-
     <script src="script/index.js"></script>
-
-
   </body>
 </html>
