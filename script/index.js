@@ -1,9 +1,12 @@
 const popups = document.querySelectorAll('.popup')
 const popupEditProfile = document.querySelector('.popup_type_profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
+const popupCardImage = document.querySelector('.popup_type_card-image')
+
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const addCardButton = document.querySelector('.profile__add-button')
-const popupCloseButtons = document.querySelectorAll('.popup__close')
+
+const popupActive = 'popup_active'
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description')
@@ -18,43 +21,47 @@ const popupFormAddCard = document.querySelector('.popup__form_type_add-card')
 
 const elementsWrapper = document.querySelector('.elements')
 
-const cardTemplate = document.querySelector('#card-template').content
+const cardTemplate = document.querySelector('#card-template')
 
 const openPopup = (popup) => {
-  popup.classList.add('popup_active')
+  popup.classList.add(popupActive)
 }
 
-const closePopup = () => {
-  popups.forEach((popup) => {
-    popup.classList.remove('popup_active')
-  })
+const closePopup = (popup) => {
+  popup.classList.remove(popupActive)
 }
 
-function openEditProfile() {
+const openEditProfile = () => {
   openPopup(popupEditProfile)
   inputName.value = profileName.textContent
   inputDescription.value = profileDescription.textContent
+  popupEditProfile.querySelector('.popup__close').addEventListener('click', () => {
+    closePopup(popupEditProfile)
+  })
 }
 
-function editProfile(event) {
+const editProfile = (event) => {
   event.preventDefault()
   profileName.textContent = inputName.value
   profileDescription.textContent = inputDescription.value
-  closePopup()
+  closePopup(popupEditProfile)
 }
 
-function openAddCard() {
+const openAddCardPopup = () => {
   openPopup(popupAddCard)
+  popupAddCard.querySelector('.popup__close').addEventListener('click', () => {
+    closePopup(popupAddCard)
+  })
 }
 
-function addCard(event) {
+const addCard = (event) => {
   event.preventDefault()
   const name = inputPlaceName.value
   const link = inputPlaceLink.value
   const alt = inputPlaceName.value
 
-  renderCard(link, alt, name)
-  closePopup()
+  renderCard(elementsWrapper, createCard(link, name, name))
+  closePopup(popupAddCard)
   inputPlaceName.value = ''
   inputPlaceLink.value = ''
 }
@@ -63,49 +70,20 @@ popupFormAddCard.addEventListener('submit', addCard)
 
 profileEditButton.addEventListener('click', openEditProfile)
 
-addCardButton.addEventListener('click', openAddCard)
-
-popupCloseButtons.forEach((button) => {
-  button.addEventListener('click', closePopup)
-})
+addCardButton.addEventListener('click', openAddCardPopup)
 
 popupFormProfile.addEventListener('submit', editProfile)
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-]
+const createCard = (src, alt, name) => {
+  const cardElement = cardTemplate.content.cloneNode(true)
+  const imageElement = cardElement.querySelector('.element__image')
+  const nameElement = cardElement.querySelector('.element__name')
+  const popupImage = popupCardImage.querySelector('.popup__card-image')
+  const popupCardTitle = popupCardImage.querySelector('.popup__card-title')
 
-const renderCard = (src, alt, name) => {
-  const cardElement = cardTemplate.cloneNode(true)
-
-  const popupCardImage = document.querySelector('.popup_type_card-image')
-
-  cardElement.querySelector('.element__image').src = src
-  cardElement.querySelector('.element__image').alt = alt
-  cardElement.querySelector('.element__name').textContent = name
+  imageElement.src = src
+  imageElement.alt = alt
+  nameElement.textContent = name
 
   cardElement.querySelector('.element__like').addEventListener('click', (e) => {
     e.target.classList.toggle('element__like_active')
@@ -115,16 +93,24 @@ const renderCard = (src, alt, name) => {
     e.target.closest('.element').remove()
   })
 
-  cardElement.querySelector('.element__image').addEventListener('click', (e) => {
-    popupCardImage.querySelector('.popup__card-image').src = src
-    popupCardImage.querySelector('.popup__card-image').alt = alt
-    popupCardImage.querySelector('.popup__card-title').textContent = name
-    popupCardImage.classList.add('popup_active')
+  imageElement.addEventListener('click', (e) => {
+    popupImage.src = src
+    popupImage.alt = alt
+    popupCardTitle.textContent = name
+    openPopup(popupCardImage)
   })
 
-  elementsWrapper.prepend(cardElement)
+  popupCardImage.querySelector('.popup__close').addEventListener('click', () => {
+    closePopup(popupCardImage)
+  })
+
+  return cardElement
+}
+
+const renderCard = (parrent, element) => {
+  parrent.prepend(element)
 }
 
 initialCards.forEach((item) => {
-  renderCard(item.link, item.name, item.name)
+  renderCard(elementsWrapper, createCard(item.link, item.name, item.name))
 })
