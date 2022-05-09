@@ -2,11 +2,11 @@ const popups = document.querySelectorAll('.popup')
 const popupEditProfile = document.querySelector('.popup_type_profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 const popupCardImage = document.querySelector('.popup_type_card-image')
+const popupActiveClass = 'popup_active'
+const popupCloseButton = '.popup__close'
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const addCardButton = document.querySelector('.profile__add-button')
-
-const popupActive = 'popup_active'
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description')
@@ -24,20 +24,17 @@ const elementsWrapper = document.querySelector('.elements')
 const cardTemplate = document.querySelector('#card-template')
 
 const openPopup = (popup) => {
-  popup.classList.add(popupActive)
+  popup.classList.add(popupActiveClass)
 }
 
 const closePopup = (popup) => {
-  popup.classList.remove(popupActive)
+  popup.classList.remove(popupActiveClass)
 }
 
 const openEditProfile = () => {
   openPopup(popupEditProfile)
   inputName.value = profileName.textContent
   inputDescription.value = profileDescription.textContent
-  popupEditProfile.querySelector('.popup__close').addEventListener('click', () => {
-    closePopup(popupEditProfile)
-  })
 }
 
 const editProfile = (event) => {
@@ -49,9 +46,6 @@ const editProfile = (event) => {
 
 const openAddCardPopup = () => {
   openPopup(popupAddCard)
-  popupAddCard.querySelector('.popup__close').addEventListener('click', () => {
-    closePopup(popupAddCard)
-  })
 }
 
 const addCard = (event) => {
@@ -60,10 +54,9 @@ const addCard = (event) => {
   const link = inputPlaceLink.value
   const alt = inputPlaceName.value
 
-  renderCard(elementsWrapper, createCard(link, name, name))
+  renderCard(elementsWrapper, createCard(link, alt, name))
   closePopup(popupAddCard)
-  inputPlaceName.value = ''
-  inputPlaceLink.value = ''
+  popupFormAddCard.reset()
 }
 
 popupFormAddCard.addEventListener('submit', addCard)
@@ -74,8 +67,20 @@ addCardButton.addEventListener('click', openAddCardPopup)
 
 popupFormProfile.addEventListener('submit', editProfile)
 
+popupEditProfile.querySelector(popupCloseButton).addEventListener('click', () => {
+  closePopup(popupEditProfile)
+})
+
+popupCardImage.querySelector(popupCloseButton).addEventListener('click', () => {
+  closePopup(popupCardImage)
+})
+
+popupAddCard.querySelector(popupCloseButton).addEventListener('click', () => {
+  closePopup(popupAddCard)
+})
+
 const createCard = (src, alt, name) => {
-  const cardElement = cardTemplate.content.cloneNode(true)
+  const cardElement = cardTemplate.content.firstElementChild.cloneNode(true)
   const imageElement = cardElement.querySelector('.element__image')
   const nameElement = cardElement.querySelector('.element__name')
   const popupImage = popupCardImage.querySelector('.popup__card-image')
@@ -98,10 +103,6 @@ const createCard = (src, alt, name) => {
     popupImage.alt = alt
     popupCardTitle.textContent = name
     openPopup(popupCardImage)
-  })
-
-  popupCardImage.querySelector('.popup__close').addEventListener('click', () => {
-    closePopup(popupCardImage)
   })
 
   return cardElement
