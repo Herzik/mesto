@@ -3,7 +3,7 @@ const popupEditProfile = document.querySelector('.popup_type_profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 const popupCardImage = document.querySelector('.popup_type_card-image')
 const popupActiveClass = 'popup_active'
-const popupCloseButton = '.popup__close'
+const popupCloseButtonSelector = '.popup__close'
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const addCardButton = document.querySelector('.profile__add-button')
@@ -17,7 +17,7 @@ const inputPlaceName = document.querySelector('#place-name')
 const inputPlaceLink = document.querySelector('#place-link')
 
 const popupFormProfile = document.querySelector('.popup__form_type_profile')
-const popupFormAddCard = document.querySelector('.popup__form_type_add-card')
+const addCardPopupForm = document.querySelector('.popup__form_type_add-card')
 
 const elementsWrapper = document.querySelector('.elements')
 
@@ -56,10 +56,10 @@ const addCard = (event) => {
 
   renderCard(elementsWrapper, createCard(link, alt, name))
   closePopup(popupAddCard)
-  popupFormAddCard.reset()
+  addCardPopupForm.reset()
 }
 
-popupFormAddCard.addEventListener('submit', addCard)
+addCardPopupForm.addEventListener('submit', addCard)
 
 profileEditButton.addEventListener('click', openEditProfile)
 
@@ -67,15 +67,15 @@ addCardButton.addEventListener('click', openAddCardPopup)
 
 popupFormProfile.addEventListener('submit', editProfile)
 
-popupEditProfile.querySelector(popupCloseButton).addEventListener('click', () => {
+popupEditProfile.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupEditProfile)
 })
 
-popupCardImage.querySelector(popupCloseButton).addEventListener('click', () => {
+popupCardImage.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupCardImage)
 })
 
-popupAddCard.querySelector(popupCloseButton).addEventListener('click', () => {
+popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupAddCard)
 })
 
