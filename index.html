@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
     <script defer src="script/cards.js"></script>
+    <script defer src="script/validation.js"></script>
+
     <script defer src="script/index.js"></script>
 
     <title>Mesto</title>
@@ -40,20 +42,28 @@
       <div class="popup__window">
         <button class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form
-          name="popup-form-type-profile"
-          action="form"
-          class="popup__form popup__form_type_profile"
-        >
-          <input type="text" id="profile-name" placeholder="Имя" name="name" class="popup__input" />
+        <form name="edit_profile" action="form" class="popup__form popup__form_type_profile">
+          <input
+            type="text"
+            id="profile-name"
+            placeholder="Имя"
+            name="name"
+            minlength="2"
+            maxlength="40"
+            class="popup__input"
+          />
           <input
             type="text"
             id="profile-description"
             placeholder="О себе"
-            name="description"
+            name="about"
+            minlength="2"
+            maxlength="200"
             class="popup__input"
           />
-          <button type="submit" class="popup__button">Сохранить</button>
+          <button type="submit" class="popup__button popup__button_disabled" disabled>
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
@@ -63,7 +73,8 @@
         <button class="popup__close"></button>
         <h3 class="popup__title">Новое место</h3>
         <form
-          name="popup-form-type-card"
+          type="url"
+          name="add_card"
           action="form"
           class="popup__form popup__form_type_add-card"
         >
@@ -73,15 +84,19 @@
             placeholder="Название"
             name="place-name"
             class="popup__input"
+            required
           />
           <input
-            type="text"
+            type="url"
             id="place-link"
             placeholder="Ссылка на картинку"
             name="place-link"
             class="popup__input"
+            required
           />
-          <button type="submit" class="popup__button">Создать</button>
+          <button type="submit" class="popup__button popup__button_disabled" disabled>
+            Создать
+          </button>
         </form>
       </div>
     </div>
