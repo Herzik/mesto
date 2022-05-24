@@ -4,6 +4,7 @@ const popupAddCard = document.querySelector('.popup_type_add-card')
 const popupCardImage = document.querySelector('.popup_type_card-image')
 const popupActiveClass = 'popup_active'
 const popupCloseButtonSelector = '.popup__close'
+const popupOverlayClass = 'popup__overlay'
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const addCardButton = document.querySelector('.profile__add-button')
@@ -29,6 +30,22 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
+}
+
+const closePopupWithEscape = (popup) => {
+  document.addEventListener('keydown', (evt) => {
+    if (evt.key === 'Escape') {
+      closePopup(popup)
+    }
+  })
+}
+
+const closePopupClickOnOverlay = (popup, overlayClass) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains(overlayClass)) {
+      closePopup(popup)
+    }
+  })
 }
 
 const openEditProfile = () => {
@@ -78,6 +95,14 @@ popupCardImage.querySelector(popupCloseButtonSelector).addEventListener('click',
 popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupAddCard)
 })
+
+closePopupWithEscape(popupAddCard)
+closePopupWithEscape(popupCardImage)
+closePopupWithEscape(popupEditProfile)
+
+closePopupClickOnOverlay(popupAddCard, popupOverlayClass)
+closePopupClickOnOverlay(popupCardImage, popupOverlayClass)
+closePopupClickOnOverlay(popupEditProfile, popupOverlayClass)
 
 const createCard = (src, alt, name) => {
   const cardElement = cardTemplate.content.firstElementChild.cloneNode(true)
