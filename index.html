@@ -42,7 +42,13 @@
       <div class="popup__window">
         <button class="popup__close"></button>
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form name="edit_profile" action="form" class="popup__form popup__form_type_profile">
+
+        <form
+          name="edit_profile"
+          action="form"
+          class="popup__form popup__form_type_profile"
+          novalidate
+        >
           <input
             type="text"
             id="profile-name"
@@ -51,7 +57,11 @@
             minlength="2"
             maxlength="40"
             class="popup__input"
+            required
           />
+          <span class="profile-name-error popup__input-error"
+            >Необходимо заполнить данное поле</span
+          >
           <input
             type="text"
             id="profile-description"
@@ -60,7 +70,12 @@
             minlength="2"
             maxlength="200"
             class="popup__input"
+            required
           />
+          <span class="profile-description-error popup__input-error"
+            >Необходимо заполнить данное поле</span
+          >
+
           <button type="submit" class="popup__button popup__button_disabled" disabled>
             Сохранить
           </button>
@@ -72,11 +87,13 @@
       <div class="popup__window">
         <button class="popup__close"></button>
         <h3 class="popup__title">Новое место</h3>
+
         <form
           type="url"
           name="add_card"
           action="form"
           class="popup__form popup__form_type_add-card"
+          novalidate
         >
           <input
             type="text"
@@ -84,8 +101,12 @@
             placeholder="Название"
             name="place-name"
             class="popup__input"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="place-name-error popup__input-error">Необходимо заполнить данное поле</span>
+
           <input
             type="url"
             id="place-link"
@@ -94,6 +115,8 @@
             class="popup__input"
             required
           />
+          <span class="place-link-error popup__input-error">Необходимо заполнить данное поле</span>
+
           <button type="submit" class="popup__button popup__button_disabled" disabled>
             Создать
           </button>
