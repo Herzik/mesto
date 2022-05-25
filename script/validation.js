@@ -26,12 +26,24 @@ const hasInvalidInput = (inputList) => {
 
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass)
-    buttonElement.disabled = true
+    disableSubmitButton(buttonElement, inactiveButtonClass)
+    // buttonElement.classList.add(inactiveButtonClass)
+    // buttonElement.disabled = true
   } else {
-    buttonElement.classList.remove(inactiveButtonClass)
-    buttonElement.disabled = false
+    enableSubmitButton(buttonElement, inactiveButtonClass)
+    // buttonElement.classList.remove(inactiveButtonClass)
+    // buttonElement.disabled = false
   }
+}
+
+const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass)
+  buttonElement.disabled = true
+}
+
+const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.remove(inactiveButtonClass)
+  buttonElement.disabled = false
 }
 
 const setEventListeners = (

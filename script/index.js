@@ -7,7 +7,7 @@ const popupCloseButtonSelector = '.popup__close'
 const popupOverlayClass = 'overlay'
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
-const addCardButton = document.querySelector('.profile__add-button')
+const buttonAddCard = document.querySelector('.profile__add-button')
 
 const profileName = document.querySelector('.profile__name')
 const profileDescription = document.querySelector('.profile__description')
@@ -26,19 +26,31 @@ const cardTemplate = document.querySelector('#card-template')
 
 const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
+
+  // document.addEventListener('keydown', closePopupWithEsc(event, popup))
+
+  disableSubmitButton(popup.querySelector('.popup__button'), 'popup__button_disabled')
 }
 
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
 }
 
-const closePopupWithEscape = (popup) => {
-  document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape') {
-      closePopup(popup)
-    }
-  })
-}
+// const closePopupWithEsc = (event, popup) => {
+//   if (event.key === 'Escape') {
+//     console.log(event.key)
+
+//     closePopup(popup)
+//   }
+// }
+
+// const closePopupWithEscape = (popup) => {
+//   document.addEventListener('keydown', (evt) => {
+//     if (evt.key === 'Escape') {
+//       closePopup(popup)
+//     }
+//   })
+// }
 
 const closePopupClickOnOverlay = (popup, overlayClass) => {
   popup.addEventListener('click', (evt) => {
@@ -80,7 +92,7 @@ addCardPopupForm.addEventListener('submit', addCard)
 
 profileEditButton.addEventListener('click', openEditProfile)
 
-addCardButton.addEventListener('click', openAddCardPopup)
+buttonAddCard.addEventListener('click', openAddCardPopup)
 
 popupFormProfile.addEventListener('submit', editProfile)
 
@@ -96,9 +108,9 @@ popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', (
   closePopup(popupAddCard)
 })
 
-closePopupWithEscape(popupAddCard)
-closePopupWithEscape(popupCardImage)
-closePopupWithEscape(popupEditProfile)
+// closePopupWithEscape(popupAddCard)
+// closePopupWithEscape(popupCardImage)
+// closePopupWithEscape(popupEditProfile)
 
 closePopupClickOnOverlay(popupAddCard, popupOverlayClass)
 closePopupClickOnOverlay(popupCardImage, popupOverlayClass)
