@@ -4,7 +4,7 @@ const popupAddCard = document.querySelector('.popup_type_add-card')
 const popupCardImage = document.querySelector('.popup_type_card-image')
 const popupActiveClass = 'popup_active'
 const popupCloseButtonSelector = '.popup__close'
-const popupOverlayClass = 'popup__overlay'
+const popupOverlayClass = 'overlay'
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const addCardButton = document.querySelector('.profile__add-button')
