@@ -33,8 +33,10 @@ const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
 }
 
 const disableSubmitButton = (buttonElement, inactiveButtonClass) => {
-  buttonElement.classList.add(inactiveButtonClass)
-  buttonElement.disabled = true
+  if (buttonElement) {
+    buttonElement.classList.add(inactiveButtonClass)
+    buttonElement.disabled = true
+  }
 }
 
 const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
