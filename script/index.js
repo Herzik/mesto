@@ -29,7 +29,7 @@ const openPopup = (popup) => {
 
   clearValidationError(popup)
 
-  document.addEventListener('keydown', closePopupWithEsc(event, popup))
+  document.addEventListener('keydown', (evt) => closePopupWithEsc(evt, popup))
 
   disableSubmitButton(popup.querySelector('.popup__button'), 'popup__button_disabled')
 }
@@ -38,19 +38,11 @@ const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
 }
 
-const closePopupWithEsc = (eventCurrent, popup) => {
-  if (eventCurrent.key === 'Escape') {
+const closePopupWithEsc = (evt, popup) => {
+  if (evt.key === 'Escape') {
     closePopup(popup)
   }
 }
-
-// const closePopupWithEscape = (popup) => {
-//   document.addEventListener('keydown', (evt) => {
-//     if (evt.key === 'Escape') {
-//       closePopup(popup)
-//     }
-//   })
-// }
 
 const closePopupClickOnOverlay = (popup, overlayClass) => {
   popup.addEventListener('click', (evt) => {
