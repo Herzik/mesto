@@ -36,6 +36,7 @@ const openPopup = (popup) => {
 
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
+  document.removeEventListener('keydown', (evt) => closePopupWithEsc(evt, popup))
 }
 
 const closePopupWithEsc = (evt, popup) => {
