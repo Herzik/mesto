@@ -27,7 +27,9 @@ const cardTemplate = document.querySelector('#card-template')
 const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
 
-  // document.addEventListener('keydown', closePopupWithEsc(event, popup))
+  clearValidationError(popup)
+
+  document.addEventListener('keydown', closePopupWithEsc(event, popup))
 
   disableSubmitButton(popup.querySelector('.popup__button'), 'popup__button_disabled')
 }
@@ -36,13 +38,11 @@ const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
 }
 
-// const closePopupWithEsc = (event, popup) => {
-//   if (event.key === 'Escape') {
-//     console.log(event.key)
-
-//     closePopup(popup)
-//   }
-// }
+const closePopupWithEsc = (eventCurrent, popup) => {
+  if (eventCurrent.key === 'Escape') {
+    closePopup(popup)
+  }
+}
 
 // const closePopupWithEscape = (popup) => {
 //   document.addEventListener('keydown', (evt) => {
@@ -107,10 +107,6 @@ popupCardImage.querySelector(popupCloseButtonSelector).addEventListener('click',
 popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupAddCard)
 })
-
-// closePopupWithEscape(popupAddCard)
-// closePopupWithEscape(popupCardImage)
-// closePopupWithEscape(popupEditProfile)
 
 closePopupClickOnOverlay(popupAddCard, popupOverlayClass)
 closePopupClickOnOverlay(popupCardImage, popupOverlayClass)
