@@ -29,8 +29,6 @@ const openPopup = (popup) => {
 
   document.addEventListener('keydown', closePopupWithEsc)
 
-  clearValidationError(popup)
-
   disableSubmitButton(popup.querySelector('.popup__button'), 'popup__button_disabled')
 }
 
@@ -56,14 +54,24 @@ const closePopupClickOnOverlay = (popup, overlayClass) => {
 
 const openEditProfile = () => {
   openPopup(popupEditProfile)
+
+  clearValidationError(
+    popupEditProfile,
+    validationConfig.inputErrorSelector,
+    validationConfig.inputSelector,
+    validationConfig.inputErrorClass
+  )
+
   inputName.value = profileName.textContent
   inputDescription.value = profileDescription.textContent
 }
 
 const editProfile = (event) => {
   event.preventDefault()
+
   profileName.textContent = inputName.value
   profileDescription.textContent = inputDescription.value
+
   closePopup(popupEditProfile)
 }
 

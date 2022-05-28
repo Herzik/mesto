@@ -1,3 +1,12 @@
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  inputErrorSelector: '.popup__input-error',
+}
+
 const showInputError = (formElement, inputElement, errorMessage, inputErrorClass) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`)
   inputElement.classList.add(inputErrorClass)
@@ -44,13 +53,13 @@ const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.disabled = false
 }
 
-const clearValidationError = (popup) => {
-  popup.querySelectorAll('.popup__input-error').forEach((error) => {
+const clearValidationError = (popup, inputErrorSelector, inputSelector, inputErrorClass) => {
+  popup.querySelectorAll(inputErrorSelector).forEach((error) => {
     error.textContent = ''
   })
 
-  popup.querySelectorAll('.popup__input').forEach((input) => {
-    input.classList.remove('popup__input_type_error')
+  popup.querySelectorAll(inputSelector).forEach((input) => {
+    input.classList.remove(inputErrorClass)
   })
 }
 
@@ -84,10 +93,4 @@ const enableValidation = ({ formSelector, ...rest }) => {
   })
 }
 
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-})
+enableValidation(validationConfig)
