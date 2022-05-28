@@ -26,10 +26,7 @@ const cardTemplate = document.querySelector('#card-template')
 
 const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
-
   document.addEventListener('keydown', closePopupWithEsc)
-
-  disableSubmitButton(popup.querySelector('.popup__button'), 'popup__button_disabled')
 }
 
 const closePopup = (popup) => {
@@ -62,6 +59,11 @@ const openEditProfile = () => {
     validationConfig.inputErrorClass
   )
 
+  disableSubmitButton(
+    popupEditProfile.querySelector(validationConfig.submitButtonSelector),
+    validationConfig.inactiveButtonClass
+  )
+
   inputName.value = profileName.textContent
   inputDescription.value = profileDescription.textContent
 }
@@ -77,6 +79,11 @@ const editProfile = (event) => {
 
 const openAddCardPopup = () => {
   openPopup(popupAddCard)
+
+  disableSubmitButton(
+    popupAddCard.querySelector(validationConfig.submitButtonSelector),
+    validationConfig.inactiveButtonClass
+  )
 }
 
 const addCard = (event) => {
