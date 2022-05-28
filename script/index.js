@@ -27,20 +27,21 @@ const cardTemplate = document.querySelector('#card-template')
 const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
 
-  clearValidationError(popup)
+  document.addEventListener('keydown', closePopupWithEsc)
 
-  document.addEventListener('keydown', (evt) => closePopupWithEsc(evt, popup))
+  clearValidationError(popup)
 
   disableSubmitButton(popup.querySelector('.popup__button'), 'popup__button_disabled')
 }
 
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
-  document.removeEventListener('keydown', (evt) => closePopupWithEsc(evt, popup))
+  document.removeEventListener('keydown', closePopupWithEsc)
 }
 
-const closePopupWithEsc = (evt, popup) => {
+const closePopupWithEsc = (evt) => {
   if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_active')
     closePopup(popup)
   }
 }
