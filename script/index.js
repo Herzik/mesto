@@ -3,8 +3,10 @@ const popupEditProfile = document.querySelector('.popup_type_profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 const popupCardImage = document.querySelector('.popup_type_card-image')
 const popupActiveClass = 'popup_active'
+const popupActiveSelector = '.popup_active'
 const popupCloseButtonSelector = '.popup__close'
 const popupOverlayClass = 'overlay'
+const popupButtonSubmit = popupEditProfile.querySelector(validationConfig.submitButtonSelector)
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const buttonAddCard = document.querySelector('.profile__add-button')
@@ -27,26 +29,27 @@ const cardTemplate = document.querySelector('#card-template')
 const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
   document.addEventListener('keydown', closePopupWithEsc)
+  document.addEventListener('click', closePopupWithClickOnOverlay)
 }
 
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
   document.removeEventListener('keydown', closePopupWithEsc)
+  document.removeEventListener('click', closePopupWithClickOnOverlay)
 }
 
 const closePopupWithEsc = (evt) => {
   if (evt.key === 'Escape') {
-    const popup = document.querySelector('.popup_active')
+    const popup = document.querySelector(popupActiveSelector)
     closePopup(popup)
   }
 }
 
-const closePopupClickOnOverlay = (popup, overlayClass) => {
-  popup.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains(overlayClass)) {
-      closePopup(popup)
-    }
-  })
+const closePopupWithClickOnOverlay = (evt) => {
+  if (evt.target.classList.contains(popupOverlayClass)) {
+    const popup = document.querySelector(popupActiveSelector)
+    closePopup(popup)
+  }
 }
 
 const openEditProfile = () => {
@@ -59,10 +62,7 @@ const openEditProfile = () => {
     validationConfig.inputErrorClass
   )
 
-  disableSubmitButton(
-    popupEditProfile.querySelector(validationConfig.submitButtonSelector),
-    validationConfig.inactiveButtonClass
-  )
+  disableSubmitButton(popupButtonSubmit, validationConfig.inactiveButtonClass)
 
   inputName.value = profileName.textContent
   inputDescription.value = profileDescription.textContent
@@ -80,10 +80,7 @@ const editProfile = (event) => {
 const openAddCardPopup = () => {
   openPopup(popupAddCard)
 
-  disableSubmitButton(
-    popupAddCard.querySelector(validationConfig.submitButtonSelector),
-    validationConfig.inactiveButtonClass
-  )
+  disableSubmitButton(popupButtonSubmit, validationConfig.inactiveButtonClass)
 }
 
 const addCard = (event) => {
@@ -116,10 +113,6 @@ popupCardImage.querySelector(popupCloseButtonSelector).addEventListener('click',
 popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupAddCard)
 })
-
-closePopupClickOnOverlay(popupAddCard, popupOverlayClass)
-closePopupClickOnOverlay(popupCardImage, popupOverlayClass)
-closePopupClickOnOverlay(popupEditProfile, popupOverlayClass)
 
 const createCard = (src, alt, name) => {
   const cardElement = cardTemplate.content.firstElementChild.cloneNode(true)
