@@ -31,10 +31,9 @@ const cardTemplate = document.querySelector('#card-template')
 //=====================
 //NOTE: Открывает модальное окно карточки
 //=====================
-const openPopup = (popup) => {
+export const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
   document.addEventListener('keydown', closePopupWithEsc)
-  document.addEventListener('click', closePopupWithClickOnOverlay)
 }
 
 const openEditProfile = () => {
@@ -59,7 +58,6 @@ const openAddCardPopup = () => {
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
   document.removeEventListener('keydown', closePopupWithEsc)
-  document.removeEventListener('click', closePopupWithClickOnOverlay)
 }
 
 const closePopupWithEsc = (evt) => {
@@ -95,10 +93,8 @@ const addCard = (event) => {
   data.name = inputPlaceName.value
   data.link = inputPlaceLink.value
 
-  const card = new Card(data, '#card-template')
-  const cardElement = card.generateCard()
+  renderCard(elementsWrapper, data, '#card-template')
 
-  renderCard(elementsWrapper, cardElement)
   closePopup(popupAddCard)
   addCardPopupForm.reset()
 }
@@ -128,22 +124,30 @@ popupEditProfile.querySelector(popupCloseButtonSelector).addEventListener('click
   closePopup(popupEditProfile)
 })
 
+popupCardImage.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
+  closePopup(popupCardImage)
+})
+
 popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupAddCard)
 })
 
+popupAddCard.addEventListener('click', closePopupWithClickOnOverlay)
+popupEditProfile.addEventListener('click', closePopupWithClickOnOverlay)
+popupCardImage.addEventListener('click', closePopupWithClickOnOverlay)
+
 //=====================
 //NOTE: Функция рендера карточек
 //=====================
-const renderCard = (parrent, element) => {
-  parrent.prepend(element)
+const renderCard = (parrent, data, cardSelector) => {
+  const card = new Card(data, cardSelector)
+  const cardElement = card.generateCard()
+  parrent.prepend(cardElement)
 }
 
 //=====================
 //NOTE: Генерируем карточки с данными из массива и рендерим их
 //=====================
 initialCards.forEach((item) => {
-  const card = new Card(item, '#card-template')
-  const cardElement = card.generateCard()
-  renderCard(elementsWrapper, cardElement)
+  renderCard(elementsWrapper, item, '#card-template')
 })

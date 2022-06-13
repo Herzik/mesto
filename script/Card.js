@@ -1,3 +1,4 @@
+import { openPopup } from './index.js'
 export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name
@@ -29,23 +30,8 @@ export default class Card {
     popupImage.alt = this._name
     popupImageTitle.textContent = this._name
 
-    popup.classList.add('popup_active')
+    openPopup(popup)
   }
-  /* ************************************** */
-
-  //=====================
-  //NOTE: Закрывает модальное окно карточки
-  //=====================
-  _handleClosePopup() {
-    document.querySelector('.popup_type_card-image').classList.remove('popup_active')
-  }
-
-  _closePopupWithEsc() {
-    if (evt.key === 'Escape') {
-      document.querySelector('.popup_type_card-image').classList.remove('popup_active')
-    }
-  }
-
   /* ************************************** */
 
   //=====================
@@ -78,10 +64,6 @@ export default class Card {
 
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._handleRemoveCard()
-    })
-
-    document.querySelector('.popup__close_type_card-image').addEventListener('click', () => {
-      this._handleClosePopup()
     })
   }
   /* ************************************** */
