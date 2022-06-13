@@ -1,4 +1,7 @@
-const popups = document.querySelectorAll('.popup')
+import { initialCards, validationConfig } from './constants.js'
+import Card from './Card.js'
+import FormValidator from './FormValidator.js'
+
 const popupEditProfile = document.querySelector('.popup_type_profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 const popupCardImage = document.querySelector('.popup_type_card-image')
@@ -6,7 +9,6 @@ const popupActiveClass = 'popup_active'
 const popupActiveSelector = '.popup_active'
 const popupCloseButtonSelector = '.popup__close'
 const popupOverlayClass = 'overlay'
-const popupButtonSubmit = popupEditProfile.querySelector(validationConfig.submitButtonSelector)
 
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const buttonAddCard = document.querySelector('.profile__add-button')
@@ -26,12 +28,34 @@ const elementsWrapper = document.querySelector('.elements')
 
 const cardTemplate = document.querySelector('#card-template')
 
+//=====================
+//NOTE: Открывает модальное окно карточки
+//=====================
 const openPopup = (popup) => {
   popup.classList.add(popupActiveClass)
   document.addEventListener('keydown', closePopupWithEsc)
   document.addEventListener('click', closePopupWithClickOnOverlay)
 }
 
+const openEditProfile = () => {
+  openPopup(popupEditProfile)
+
+  validationEditProfule.cleanUpForm()
+
+  inputName.value = profileName.textContent
+  inputDescription.value = profileDescription.textContent
+}
+
+const openAddCardPopup = () => {
+  openPopup(popupAddCard)
+
+  valadationAddCard.cleanUpForm()
+}
+/* ************************************** */
+
+//=====================
+//NOTE: Закрывает модальное окно карточки
+//=====================
 const closePopup = (popup) => {
   popup.classList.remove(popupActiveClass)
   document.removeEventListener('keydown', closePopupWithEsc)
@@ -51,22 +75,7 @@ const closePopupWithClickOnOverlay = (evt) => {
     closePopup(popup)
   }
 }
-
-const openEditProfile = () => {
-  openPopup(popupEditProfile)
-
-  clearValidationError(
-    popupEditProfile,
-    validationConfig.inputErrorSelector,
-    validationConfig.inputSelector,
-    validationConfig.inputErrorClass
-  )
-
-  disableSubmitButton(popupButtonSubmit, validationConfig.inactiveButtonClass)
-
-  inputName.value = profileName.textContent
-  inputDescription.value = profileDescription.textContent
-}
+/* ************************************** */
 
 const editProfile = (event) => {
   event.preventDefault()
@@ -77,22 +86,35 @@ const editProfile = (event) => {
   closePopup(popupEditProfile)
 }
 
-const openAddCardPopup = () => {
-  openPopup(popupAddCard)
-
-  disableSubmitButton(popupButtonSubmit, validationConfig.inactiveButtonClass)
-}
-
+//=====================
+//NOTE: Добавление карточки через форму
+//=====================
 const addCard = (event) => {
   event.preventDefault()
-  const name = inputPlaceName.value
-  const link = inputPlaceLink.value
-  const alt = inputPlaceName.value
+  const data = {}
+  data.name = inputPlaceName.value
+  data.link = inputPlaceLink.value
 
-  renderCard(elementsWrapper, createCard(link, alt, name))
+  const card = new Card(data, '#card-template')
+  const cardElement = card.generateCard()
+
+  renderCard(elementsWrapper, cardElement)
   closePopup(popupAddCard)
   addCardPopupForm.reset()
 }
+
+//=====================
+//NOTE: Создает и активирует экземпляры валидаций
+//=====================
+const valadationAddCard = new FormValidator(validationConfig, popupAddCard)
+valadationAddCard.enableValidation()
+
+const validationEditProfule = new FormValidator(validationConfig, popupEditProfile)
+validationEditProfule.enableValidation()
+
+//=====================
+//NOTE: Слушатели событий
+//=====================
 
 addCardPopupForm.addEventListener('submit', addCard)
 
@@ -106,47 +128,22 @@ popupEditProfile.querySelector(popupCloseButtonSelector).addEventListener('click
   closePopup(popupEditProfile)
 })
 
-popupCardImage.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
-  closePopup(popupCardImage)
-})
-
 popupAddCard.querySelector(popupCloseButtonSelector).addEventListener('click', () => {
   closePopup(popupAddCard)
 })
 
-const createCard = (src, alt, name) => {
-  const cardElement = cardTemplate.content.firstElementChild.cloneNode(true)
-  const imageElement = cardElement.querySelector('.element__image')
-  const nameElement = cardElement.querySelector('.element__name')
-  const popupImage = popupCardImage.querySelector('.popup__card-image')
-  const popupCardTitle = popupCardImage.querySelector('.popup__card-title')
-
-  imageElement.src = src
-  imageElement.alt = alt
-  nameElement.textContent = name
-
-  cardElement.querySelector('.element__like').addEventListener('click', (e) => {
-    e.target.classList.toggle('element__like_active')
-  })
-
-  cardElement.querySelector('.element__delete').addEventListener('click', (e) => {
-    e.target.closest('.element').remove()
-  })
-
-  imageElement.addEventListener('click', (e) => {
-    popupImage.src = src
-    popupImage.alt = alt
-    popupCardTitle.textContent = name
-    openPopup(popupCardImage)
-  })
-
-  return cardElement
-}
-
+//=====================
+//NOTE: Функция рендера карточек
+//=====================
 const renderCard = (parrent, element) => {
   parrent.prepend(element)
 }
 
+//=====================
+//NOTE: Генерируем карточки с данными из массива и рендерим их
+//=====================
 initialCards.forEach((item) => {
-  renderCard(elementsWrapper, createCard(item.link, item.name, item.name))
+  const card = new Card(item, '#card-template')
+  const cardElement = card.generateCard()
+  renderCard(elementsWrapper, cardElement)
 })

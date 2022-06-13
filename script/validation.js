@@ -52,7 +52,7 @@ const enableSubmitButton = (buttonElement, inactiveButtonClass) => {
   buttonElement.classList.remove(inactiveButtonClass)
   buttonElement.disabled = false
 }
-
+//TODO: Проверить что имел ввиду ревьюер
 const clearValidationError = (popup, inputErrorSelector, inputSelector, inputErrorClass) => {
   popup.querySelectorAll(inputErrorSelector).forEach((error) => {
     error.textContent = ''
