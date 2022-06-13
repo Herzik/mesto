@@ -39,6 +39,13 @@ export default class Card {
   _handleClosePopup() {
     document.querySelector('.popup_type_card-image').classList.remove('popup_active')
   }
+
+  _closePopupWithEsc() {
+    if (evt.key === 'Escape') {
+      document.querySelector('.popup_type_card-image').classList.remove('popup_active')
+    }
+  }
+
   /* ************************************** */
 
   //=====================
