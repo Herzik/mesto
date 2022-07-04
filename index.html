@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="pages/index.css" />
-    <script defer type="module" src="script/index.js"></script>
+    <script defer type="module" src="pages/index.js"></script>
 
     <title>Mesto</title>
   </head>
@@ -90,25 +90,25 @@
         >
           <input
             type="text"
-            id="place-name"
+            id="placename"
             placeholder="Название"
-            name="place-name"
+            name="placename"
             class="popup__input"
             minlength="2"
             maxlength="40"
             required
           />
-          <span class="place-name-error popup__input-error"></span>
+          <span class="placename-error popup__input-error"></span>
 
           <input
             type="url"
-            id="place-link"
+            id="placelink"
             placeholder="Ссылка на картинку"
-            name="place-link"
+            name="placelink"
             class="popup__input"
             required
           />
-          <span class="place-link-error popup__input-error"></span>
+          <span class="placelink-error popup__input-error"></span>
 
           <button type="submit" class="popup__button">Создать</button>
         </form>

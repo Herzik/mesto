@@ -1,37 +1,25 @@
-import { openPopup } from './index.js'
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name
     this._image = data.link
     this._cardSelector = cardSelector
+    this._handleCardClick = handleCardClick
   }
-
-  //=====================
-  //NOTE: Возвращает DOM элемент из шаблона
-  //=====================
-  _getTemplate() {
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content.firstElementChild.cloneNode(true)
-
-    return cardElement
-  }
-  /* ************************************** */
 
   //=====================
   //NOTE: Открывает модальное окно карточки
   //=====================
-  _handleOpenPopup() {
-    const popup = document.querySelector('.popup_type_card-image')
-    const popupImage = popup.querySelector('.popup__card-image')
-    const popupImageTitle = popup.querySelector('.popup__card-title')
+  // _handleOpenPopup() {
+  //   const popup = document.querySelector('.popup_type_card-image')
+  //   const popupImage = popup.querySelector('.popup__card-image')
+  //   const popupImageTitle = popup.querySelector('.popup__card-title')
 
-    popupImage.src = this._image
-    popupImage.alt = this._name
-    popupImageTitle.textContent = this._name
+  //   popupImage.src = this._image
+  //   popupImage.alt = this._name
+  //   popupImageTitle.textContent = this._name
 
-    openPopup(popup)
-  }
+  //   openPopup(popup)
+  // }
   /* ************************************** */
 
   //=====================
@@ -55,7 +43,7 @@ export default class Card {
   //=====================
   _setEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleOpenPopup()
+      this._handleCardClick()
     })
 
     this._element.querySelector('.element__like').addEventListener('click', () => {
@@ -65,6 +53,18 @@ export default class Card {
     this._element.querySelector('.element__delete').addEventListener('click', () => {
       this._handleRemoveCard()
     })
+  }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Возвращает DOM элемент из шаблона
+  //=====================
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content.firstElementChild.cloneNode(true)
+
+    return cardElement
   }
   /* ************************************** */
 
