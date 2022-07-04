@@ -17,6 +17,8 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/popupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 
+import './index.css'
+
 //=====================
 //NOTE: Создает и активирует экземпляры валидаций
 //=====================
