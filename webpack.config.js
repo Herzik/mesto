@@ -27,6 +27,9 @@ module.exports = {
       {
         test: /\.(woff(2)?|eot|ttf|otf)$/, // регулярное выражение, которое ищет все файлы с такими расширениями
         type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name].[hash][ext]',
+        },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/, // регулярное выражение, которое ищет все файлы с такими расширениями
