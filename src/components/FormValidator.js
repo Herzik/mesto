@@ -6,6 +6,10 @@ export default class FormValidator {
     this._inputErrorClass = config.inputErrorClass
     this._inputErrorSelector = config.inputErrorSelector
     this._formElement = formElement
+
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
+
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector)
   }
 
   //=====================
@@ -43,8 +47,8 @@ export default class FormValidator {
   //=====================
   //NOTE: Если инпут имеет неверный ввод
   //=====================
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid
     })
   }
@@ -53,24 +57,24 @@ export default class FormValidator {
   //=====================
   //NOTE: Переключение состояния кнопки Submit
   //=====================
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      this._disableSubmitButton(buttonElement, this._inactiveButtonClass)
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this._disableSubmitButton()
     } else {
-      this._enableSubmitButton(buttonElement, this._inactiveButtonClass)
+      this._enableSubmitButton()
     }
   }
 
-  _disableSubmitButton(buttonElement) {
-    if (buttonElement) {
-      buttonElement.classList.add(this._inactiveButtonClass)
-      buttonElement.disabled = true
+  _disableSubmitButton() {
+    if (this._buttonElement) {
+      this._buttonElement.classList.add(this._inactiveButtonClass)
+      this._buttonElement.disabled = true
     }
   }
 
-  _enableSubmitButton(buttonElement) {
-    buttonElement.classList.remove(this._inactiveButtonClass)
-    buttonElement.disabled = false
+  _enableSubmitButton() {
+    this._buttonElement.classList.remove(this._inactiveButtonClass)
+    this._buttonElement.disabled = false
   }
   /* ************************************** */
 
@@ -78,16 +82,16 @@ export default class FormValidator {
   //NOTE: Включает валидацию формы для всех инпутов
   //=====================
   enableValidation() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
+    // const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
 
-    const buttonElement = this._formElement.querySelector(this._submitButtonSelector)
+    // const buttonElement = this._formElement.querySelector(this._submitButtonSelector)
 
-    this._toggleButtonState(inputList, buttonElement)
+    this._toggleButtonState()
 
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement)
-        this._toggleButtonState(inputList, buttonElement)
+        this._toggleButtonState()
       })
     })
   }
@@ -97,14 +101,11 @@ export default class FormValidator {
   //NOTE: Очищает форму
   //=====================
   cleanUpForm() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
-    const buttonElement = this._formElement.querySelector(this._submitButtonSelector)
-
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement)
     })
 
-    this._toggleButtonState(inputList, buttonElement)
+    this._toggleButtonState()
   }
   /* ************************************** */
 }

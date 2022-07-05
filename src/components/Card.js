@@ -7,22 +7,6 @@ export default class Card {
   }
 
   //=====================
-  //NOTE: Открывает модальное окно карточки
-  //=====================
-  // _handleOpenPopup() {
-  //   const popup = document.querySelector('.popup_type_card-image')
-  //   const popupImage = popup.querySelector('.popup__card-image')
-  //   const popupImageTitle = popup.querySelector('.popup__card-title')
-
-  //   popupImage.src = this._image
-  //   popupImage.alt = this._name
-  //   popupImageTitle.textContent = this._name
-
-  //   openPopup(popup)
-  // }
-  /* ************************************** */
-
-  //=====================
   //NOTE: Отвечает за лайк карточек
   //=====================
   _handleLikeCard() {
@@ -35,6 +19,7 @@ export default class Card {
   //=====================
   _handleRemoveCard() {
     this._element.remove()
+    this._element = null
   }
   /* ************************************** */
 
