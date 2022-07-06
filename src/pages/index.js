@@ -97,13 +97,7 @@ profileEditButton.addEventListener('click', popupWithProfile.open.bind(popupWith
 //=====================
 const popupWithAddCard = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  submitHandler: () => {
-    const inputList = popupWithAddCard.getInputValues()
-
-    const data = {}
-    data.name = inputList.placename
-    data.link = inputList.placelink
-
+  submitHandler: (data) => {
     cardList.addItem(createCard(data))
 
     popupWithAddCard.close()
