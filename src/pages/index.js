@@ -36,23 +36,25 @@ const popupWithImage = new PopupWithImage('.popup_type_card-image')
 
 popupWithImage.setEventListeners()
 
+const createCard = (item) => {
+  const card = new Card(
+    {
+      data: item,
+      handleCardClick: () => {
+        popupWithImage.open(item)
+      },
+    },
+    '#card-template'
+  )
+
+  return card.generateCard()
+}
+
 const cardList = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const card = new Card(
-        {
-          data: item,
-          handleCardClick: () => {
-            popupWithImage.open(item)
-          },
-        },
-        '#card-template'
-      )
-
-      const cardElement = card.generateCard()
-
-      cardList.addItem(cardElement)
+      cardList.addItem(createCard(item))
     },
   },
   '.elements'
@@ -71,11 +73,8 @@ const userInfo = new UserInfo({
 
 const popupWithProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
-  submitHandler: (evt) => {
-    evt.preventDefault()
-    const inputList = popupWithProfile.getInputValues()
-    profileName.textContent = inputList.name
-    profileDescription.textContent = inputList.about
+  submitHandler: (data) => {
+    userInfo.setUserInfo(data)
     popupWithProfile.close()
   },
   formActivation: () => {
@@ -98,38 +97,14 @@ profileEditButton.addEventListener('click', popupWithProfile.open.bind(popupWith
 //=====================
 const popupWithAddCard = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  submitHandler: (evt) => {
-    evt.preventDefault()
-
+  submitHandler: () => {
     const inputList = popupWithAddCard.getInputValues()
 
     const data = {}
     data.name = inputList.placename
     data.link = inputList.placelink
 
-    const cardItem = new Section(
-      {
-        items: [data],
-        renderer: (item) => {
-          const card = new Card(
-            {
-              data: item,
-              handleCardClick: () => {
-                popupWithImage.open(item)
-              },
-            },
-            '#card-template'
-          )
-
-          const cardElement = card.generateCard()
-
-          cardItem.addItem(cardElement)
-        },
-      },
-      '.elements'
-    )
-
-    cardItem.renderItems()
+    cardList.addItem(createCard(data))
 
     popupWithAddCard.close()
   },
