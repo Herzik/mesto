@@ -82,10 +82,6 @@ export default class FormValidator {
   //NOTE: Включает валидацию формы для всех инпутов
   //=====================
   enableValidation() {
-    // const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector))
-
-    // const buttonElement = this._formElement.querySelector(this._submitButtonSelector)
-
     this._toggleButtonState()
 
     this._inputList.forEach((inputElement) => {
