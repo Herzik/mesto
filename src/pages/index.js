@@ -5,12 +5,9 @@ import {
   popupAddCard,
   profileEditButton,
   buttonAddCard,
-  profileName,
-  profileDescription,
   inputName,
   inputDescription,
   apiConfig,
-  profileAvatar,
 } from '../utils/constants.js'
 
 import Card from '../components/Card.js'
@@ -29,13 +26,9 @@ const api = new Api(apiConfig)
 //NOTE: Временные методы
 //=====================
 
-// api.getProfileAvatar().then((data) => {
-//   profileAvatar.src = data.avatar
-// })
-
 api.getProfile().then((data) => {
   userInfo.setUserInfo(data)
-  profileAvatar.src = data.avatar
+  userInfo.updateAvatar(data)
 })
 
 /* ************************************** */
@@ -90,13 +83,21 @@ cardList.renderItems()
 const userInfo = new UserInfo({
   profileNameSelector: '.profile__name',
   profileDescriptionSelector: '.profile__description',
+  profileAvatarSelector: '.profile__avatar',
 })
 
 const popupWithProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   submitHandler: (data) => {
-    userInfo.setUserInfo(data)
-    popupWithProfile.close()
+    api
+      .setProfile(data)
+      .then((data) => {
+        userInfo.setUserInfo(data)
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupWithProfile.close()
+      })
   },
   formActivation: () => {
     const formData = userInfo.getUserInfo()

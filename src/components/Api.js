@@ -16,9 +16,19 @@ export default class Api {
     })
   }
 
-  setProfile() {}
+  setProfile({ name, about }) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ name, about }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
 
-  // Метод повторяется....
+      return Promise.reject(`Ошибка ${res.status}`)
+    })
+  }
 
   getIntialCards() {}
 

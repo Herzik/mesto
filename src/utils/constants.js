@@ -47,12 +47,8 @@ const popupAddCard = document.querySelector('.popup_type_add-card')
 const profileEditButton = document.querySelector('.profile__edit-icon')
 const buttonAddCard = document.querySelector('.profile__add-button')
 
-const profileName = document.querySelector('.profile__name')
-const profileDescription = document.querySelector('.profile__description')
 const inputName = document.querySelector('#profile-name')
 const inputDescription = document.querySelector('#profile-description')
-
-const profileAvatar = document.querySelector('.profile__avatar')
 
 export {
   initialCards,
@@ -61,10 +57,7 @@ export {
   popupAddCard,
   profileEditButton,
   buttonAddCard,
-  profileName,
-  profileDescription,
   inputName,
   inputDescription,
   apiConfig,
-  profileAvatar,
 }
