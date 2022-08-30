@@ -2,8 +2,13 @@ export default class Card {
   constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name
     this._image = data.link
-    this._cardSelector = cardSelector
+    this._likes = data._likes
+    this._id = data._id
+    this._ownerId = data.owner._id
+    this._iserId = data.userId
     this._handleCardClick = handleCardClick
+
+    this._cardSelector = cardSelector
   }
 
   //=====================

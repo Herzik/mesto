@@ -23,17 +23,6 @@ import './index.css'
 const api = new Api(apiConfig)
 
 //=====================
-//NOTE: Временные методы
-//=====================
-
-api.getProfile().then((data) => {
-  userInfo.setUserInfo(data)
-  userInfo.updateAvatar(data)
-})
-
-/* ************************************** */
-
-//=====================
 //NOTE: Создает и активирует экземпляры валидаций
 //=====================
 const valadationAddCard = new FormValidator(validationConfig, popupAddCard)
@@ -64,17 +53,17 @@ const createCard = (item) => {
   return card.generateCard()
 }
 
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (item) => {
-      cardList.addItem(createCard(item))
-    },
-  },
-  '.elements'
-)
+// const cardList = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (item) => {
+//       cardList.addItem(createCard(item))
+//     },
+//   },
+//   '.elements'
+// )
 
-cardList.renderItems()
+// cardList.renderItems()
 /* ************************************** */
 
 //=====================
@@ -133,4 +122,26 @@ const popupWithAddCard = new PopupWithForm({
 popupWithAddCard.setEventListeners()
 
 buttonAddCard.addEventListener('click', popupWithAddCard.open.bind(popupWithAddCard))
+/* ************************************** */
+
+//=====================
+//FIXME: ВРЕМЕННЫЕ МЕТОДЫ
+//=====================
+
+Promise.all([api.getProfile(), api.getInitialCards()]).then(([data, cards]) => {
+  userInfo.initialize(data)
+  console.log(userInfo.getUserId())
+
+  const cardList = new Section(
+    {
+      items: cards,
+      renderer: (item) => {
+        cardList.addItem(createCard(item))
+      },
+    },
+    '.elements'
+  )
+
+  cardList.renderItems()
+})
 /* ************************************** */
