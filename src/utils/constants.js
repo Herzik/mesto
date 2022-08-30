@@ -36,7 +36,7 @@ const validationConfig = {
 const apiConfig = {
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-49',
   headers: {
-    autorization: 'b68ec8e8-fa4a-49bc-9d89-b437a1d32c40',
+    authorization: 'b68ec8e8-fa4a-49bc-9d89-b437a1d32c40',
     'Content-Type': 'application/json',
   },
 }
@@ -52,6 +52,8 @@ const profileDescription = document.querySelector('.profile__description')
 const inputName = document.querySelector('#profile-name')
 const inputDescription = document.querySelector('#profile-description')
 
+const profileAvatar = document.querySelector('.profile__avatar')
+
 export {
   initialCards,
   validationConfig,
@@ -64,4 +66,5 @@ export {
   inputName,
   inputDescription,
   apiConfig,
+  profileAvatar,
 }

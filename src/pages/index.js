@@ -10,6 +10,7 @@ import {
   inputName,
   inputDescription,
   apiConfig,
+  profileAvatar,
 } from '../utils/constants.js'
 
 import Card from '../components/Card.js'
@@ -23,6 +24,21 @@ import Api from '../components/Api.js'
 import './index.css'
 
 const api = new Api(apiConfig)
+
+//=====================
+//NOTE: Временные методы
+//=====================
+
+// api.getProfileAvatar().then((data) => {
+//   profileAvatar.src = data.avatar
+// })
+
+api.getProfile().then((data) => {
+  userInfo.setUserInfo(data)
+  profileAvatar.src = data.avatar
+})
+
+/* ************************************** */
 
 //=====================
 //NOTE: Создает и активирует экземпляры валидаций

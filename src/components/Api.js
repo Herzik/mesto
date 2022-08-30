@@ -4,15 +4,21 @@ export default class Api {
     this._headers = config.headers
   }
 
-  getProfileName() {
-    fetch(`${this._url}/users/me`, {
+  getProfile() {
+    return fetch(`${this._url}/users/me`, {
       headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+
+      return Promise.reject(`Ошибка ${res.status}`)
     })
-      .then((res) => res.json())
-      .then((res) => console.log(res))
   }
 
-  setProfileName() {}
+  setProfile() {}
+
+  // Метод повторяется....
 
   getIntialCards() {}
 
