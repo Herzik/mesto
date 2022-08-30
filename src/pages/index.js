@@ -9,15 +9,20 @@ import {
   profileDescription,
   inputName,
   inputDescription,
+  apiConfig,
 } from '../utils/constants.js'
+
 import Card from '../components/Card.js'
 import Section from '../components/Section.js'
 import FormValidator from '../components/FormValidator.js'
 import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/popupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
+import Api from '../components/Api.js'
 
 import './index.css'
+
+const api = new Api(apiConfig)
 
 //=====================
 //NOTE: Создает и активирует экземпляры валидаций

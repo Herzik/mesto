@@ -33,6 +33,14 @@ const validationConfig = {
   inputErrorSelector: '.popup__input-error',
 }
 
+const apiConfig = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-49',
+  headers: {
+    autorization: 'b68ec8e8-fa4a-49bc-9d89-b437a1d32c40',
+    'Content-Type': 'application/json',
+  },
+}
+
 const popupEditProfile = document.querySelector('.popup_type_profile')
 const popupAddCard = document.querySelector('.popup_type_add-card')
 
@@ -55,4 +63,5 @@ export {
   profileDescription,
   inputName,
   inputDescription,
+  apiConfig,
 }
