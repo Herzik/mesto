@@ -15,7 +15,10 @@
     <main class="main">
       <section class="profile">
         <div class="profile__info">
-          <img src="images/avatar.png" alt="фотография" class="profile__avatar" />
+          <div class="profile__avatar-wrapper">
+            <img src="#" alt="#" class="profile__avatar" />
+          </div>
+
           <div class="profile__wrapper">
             <div class="profile__name-block">
               <h1 class="profile__name"></h1>
@@ -66,6 +69,34 @@
             required
           />
           <span class="profile-description-error popup__input-error"></span>
+
+          <button type="submit" class="popup__button popup__button_disabled" disabled>
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup overlay popup_type_avatar">
+      <div class="popup__window">
+        <button class="popup__close"></button>
+        <h3 class="popup__title">Обновить аватар</h3>
+
+        <form
+          name="update_avatar"
+          action="form"
+          class="popup__form popup__form_type_update_avatar"
+          novalidate
+        >
+          <input
+            type="url"
+            id="avatar-link"
+            placeholder="Ссылка на картинку"
+            name="avatar"
+            class="popup__input"
+            required
+          />
+          <span class="avatar-link-error popup__input-error"></span>
 
           <button type="submit" class="popup__button popup__button_disabled" disabled>
             Сохранить
