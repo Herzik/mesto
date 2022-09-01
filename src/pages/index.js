@@ -52,10 +52,15 @@ const popupWithImage = new PopupWithImage('.popup_type_card-image')
 
 popupWithImage.setEventListeners()
 
-const createCard = (item) => {
+const createCard = ({ name, link, likes, _id, owner }) => {
   const card = new Card(
     {
-      data: item,
+      name: name,
+      link: link,
+      likes: likes,
+      _id: _id,
+      owner: owner,
+      userId: userInfo.getUserId(),
       handleCardClick: () => {
         popupWithImage.open(item)
       },

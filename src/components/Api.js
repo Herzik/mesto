@@ -71,9 +71,11 @@ export default class Api {
       return Promise.reject(`Ошибка ${res.status}`)
     })
   }
-
   /* ************************************** */
 
+  //=====================
+  //NOTE: Записываем карточку на сервер
+  //=====================
   createCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
       method: 'POST',

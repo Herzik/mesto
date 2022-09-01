@@ -1,5 +1,6 @@
 export default class Card {
   constructor({ name, link, likes = [], _id, owner = {}, userId, handleCardClick }, cardSelector) {
+    //{ name, link, likes = [], _id, owner = {}, userId, handleCardClick }, cardSelector
     this._name = name
     this._image = link
     this._likes = likes
@@ -71,6 +72,8 @@ export default class Card {
 
     const buttonRemoveCard = this._element.querySelector('.element__delete')
 
+    const countLike = this._element.querySelector('.element__count-like')
+
     if (this._ownerId != this._userId) {
       buttonRemoveCard.remove()
     }
@@ -78,8 +81,9 @@ export default class Card {
     imageElement.src = this._image
     imageElement.alt = this._name
     nameElement.textContent = this._name
+    countLike.textContent = this._likes.length
 
-    console.log(this._userId, this._ownerId)
+    console.log(this._likes.length)
 
     return this._element
   }
