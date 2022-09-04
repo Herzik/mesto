@@ -1,6 +1,18 @@
 export default class Card {
-  constructor({ name, link, likes = [], _id, owner = {}, userId, handleCardClick }, cardSelector) {
-    //{ name, link, likes = [], _id, owner = {}, userId, handleCardClick }, cardSelector
+  constructor(
+    {
+      name,
+      link,
+      likes = [],
+      _id,
+      owner = {},
+      userId,
+      handleCardClick,
+      handleLikeCard,
+      handleRemoveCard,
+    },
+    cardSelector
+  ) {
     this._name = name
     this._image = link
     this._likes = likes
@@ -8,26 +20,11 @@ export default class Card {
     this._userId = userId
     this._ownerId = owner._id
     this._handleCardClick = handleCardClick
+    this._handleLikeCard = handleLikeCard.bind(this)
+    this._handleRemoveCard = handleRemoveCard
 
     this._cardSelector = cardSelector
   }
-
-  //=====================
-  //NOTE: Отвечает за лайк карточек
-  //=====================
-  _handleLikeCard() {
-    this._element.querySelector('.element__like').classList.toggle('element__like_active')
-  }
-  /* ************************************** */
-
-  //=====================
-  //NOTE: Удаление карточек
-  //=====================
-  _handleRemoveCard() {
-    this._element.remove()
-    this._element = null
-  }
-  /* ************************************** */
 
   //=====================
   //NOTE: Слушатели событий
@@ -48,6 +45,60 @@ export default class Card {
   /* ************************************** */
 
   //=====================
+  //NOTE: Получаем количество лайков
+  //=====================
+  _setCountLikes() {
+    this._element.querySelector('.element__count-like').textContent = this._likes.length
+  }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Получаем состояние лайка
+  //=====================
+  _getStateLike() {
+    return this._likes.find((owner) => owner._id === this._userId)
+  }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Получаем все лайки
+  //=====================
+  getLikes() {
+    return this._likes
+  }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Устанавливаем лайки
+  //=====================
+  setLikes(likes) {
+    this._likes = likes
+  }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Рендерим лайки
+  //=====================
+  renderLikes(likes) {
+    this.setLikes(likes)
+    this._setCountLikes()
+    if (this._getStateLike()) {
+      this._element.querySelector('.element__like').classList.add('element__like_active')
+    } else {
+      this._element.querySelector('.element__like').classList.remove('element__like_active')
+    }
+  }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Получаем айди карточки
+  //=====================
+  getId() {
+    return this._id
+  }
+  /* ************************************** */
+
+  //=====================
   //NOTE: Возвращает DOM элемент из шаблона
   //=====================
   _getTemplate() {
@@ -64,26 +115,21 @@ export default class Card {
   //=====================
   generateCard() {
     this._element = this._getTemplate()
-
+    this.renderLikes(this._likes)
     this._setEventListeners()
 
     const imageElement = this._element.querySelector('.element__image')
     const nameElement = this._element.querySelector('.element__name')
 
-    const buttonRemoveCard = this._element.querySelector('.element__delete')
-
-    const countLike = this._element.querySelector('.element__count-like')
-
-    if (this._ownerId != this._userId) {
-      buttonRemoveCard.remove()
-    }
+    const removeElement = this._element.querySelector('.element__delete')
 
     imageElement.src = this._image
     imageElement.alt = this._name
     nameElement.textContent = this._name
-    countLike.textContent = this._likes.length
 
-    console.log(this._likes.length)
+    if (this._ownerId != this._userId) {
+      removeElement.remove()
+    }
 
     return this._element
   }

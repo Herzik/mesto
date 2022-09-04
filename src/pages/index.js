@@ -62,7 +62,30 @@ const createCard = ({ name, link, likes, _id, owner }) => {
       owner: owner,
       userId: userInfo.getUserId(),
       handleCardClick: () => {
-        popupWithImage.open(item)
+        popupWithImage.open({ name, link })
+      },
+      handleLikeCard: () => {
+        const stateLike = card.getLikes().find((owner) => owner._id === userInfo.getUserId())
+
+        if (!stateLike) {
+          api
+            .setLike(card.getId())
+            .then((res) => {
+              card.renderLikes(res.likes)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        } else {
+          api
+            .removeLike(card.getId())
+            .then((res) => {
+              card.renderLikes(res.likes)
+            })
+            .catch((err) => {
+              console.log(err)
+            })
+        }
       },
     },
     '#card-template'
@@ -89,8 +112,8 @@ const createCard = ({ name, link, likes, _id, owner }) => {
 //=====================
 const popupWithAddCard = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  submitHandler: (data) => {
-    cardList.addItem(createCard(data))
+  submitHandler: ({ name, link }) => {
+    cardList.addItem(createCard({ name, link }))
 
     popupWithAddCard.close()
   },
