@@ -1,10 +1,10 @@
-const path = require('path') // подключаем path к конфигу вебпак
-const HtmlWebpackPlugin = require('html-webpack-plugin') //подключаем плагин для обработки HTML
-const { CleanWebpackPlugin } = require('clean-webpack-plugin') // плагин для очистки папки dist
-const MiniCssExtractPlugin = require('mini-css-extract-plugin') // для работы с CSS
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
-  entry: { main: './src/pages/index.js' }, // Точка входа
+  entry: { main: './src/pages/index.js' },
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js',
@@ -12,27 +12,25 @@ module.exports = {
   },
   mode: 'development',
   devServer: {
-    static: path.resolve(__dirname, './dist'), // путь, куда "смотрит" режим разработчика
-    port: 8081, // порт в режиме разработки
-    open: true, // автозапуск
+    port: 8081,
+    open: true,
   },
   module: {
-    // массив правил
     rules: [
       {
-        test: /\.js$/, // регулярное выражение, которое ищет все js файлы
-        use: 'babel-loader', // при обработке этих файлов используем babel-loader
-        exclude: '/node_modules', // папка исключения
+        test: /\.js$/,
+        use: 'babel-loader',
+        exclude: '/node_modules',
       },
       {
-        test: /\.(woff(2)?|eot|ttf|otf)$/, // регулярное выражение, которое ищет все файлы с такими расширениями
+        test: /\.(woff(2)?|eot|ttf|otf)$/,
         type: 'asset/resource',
         generator: {
           filename: 'fonts/[name].[hash][ext]',
         },
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/, // регулярное выражение, которое ищет все файлы с такими расширениями
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
         generator: {
           filename: 'images/[name].[hash][ext]',
@@ -56,9 +54,8 @@ module.exports = {
     ],
   },
   plugins: [
-    // Подключение плагинов
     new HtmlWebpackPlugin({
-      template: './src/index.html', // путь к index.html в качестве шаблона
+      template: './src/index.html',
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
