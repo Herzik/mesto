@@ -110,13 +110,19 @@ const createCard = ({ name, link, likes, _id, owner }) => {
 const popupWithAddCard = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   submitHandler: (data) => {
+    popupWithAddCard.setTextButton('Сохранение...')
+
     api
       .createCard(data)
       .then((res) => {
         cardList.addItem(createCard(res))
+        popupWithAddCard.close()
       })
       .catch((err) => {
         console.log(err)
+      })
+      .finally(() => {
+        popupWithAddCard.defaultTextButton()
       })
   },
   formActivation: () => {
@@ -176,17 +182,19 @@ const userInfo = new UserInfo({
 const popupWithProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   submitHandler: (data) => {
+    popupWithProfile.setTextButton('Сохранение...')
+
     api
       .setProfile(data)
       .then((data) => {
-        popupWithProfile.setTextButton('Сохранение...')
-
         userInfo.setUserInfo(data)
 
         popupWithProfile.close()
       })
       .catch((err) => console.log(err))
-      .finally(() => {})
+      .finally(() => {
+        popupWithProfile.defaultTextButton()
+      })
   },
   formActivation: () => {
     const formData = userInfo.getUserInfo()
