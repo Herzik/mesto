@@ -18,35 +18,40 @@ import PopupWithImage from '../components/PopupWithImage.js'
 import PopupWithForm from '../components/popupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
+import PopupConfirm from '../components/PopupConfirm.js'
 
 import './index.css'
 
 const api = new Api(apiConfig)
 
 //=====================
-//FIXME: Запуск инициализации карточек и профиля
+//NOTE: Создаем экземпляр класса для отрисовки карточки
+//=====================
+const cardList = new Section(
+  {
+    items: null,
+    renderer: (item) => {
+      cardList.addItem(createCard(item))
+    },
+  },
+  '.elements'
+)
+/* ************************************** */
+
+//=====================
+//NOTE: Запуск инициализации карточек и профиля
 //=====================
 Promise.all([api.getProfile(), api.getInitialCards()]).then(([data, cards]) => {
   userInfo.initialize(data)
 
-  console.log(userInfo.getUserId())
-
-  const cardList = new Section(
-    {
-      items: cards,
-      renderer: (item) => {
-        cardList.addItem(createCard(item))
-      },
-    },
-    '.elements'
-  )
+  cardList.setRendererItems(cards)
 
   cardList.renderItems()
 })
 /* ************************************** */
 
 //=====================
-//FIXME: Генерируем карточки с данными из массива
+//NOTE: Генерируем карточки с данными из массива
 //=====================
 const popupWithImage = new PopupWithImage('.popup_type_card-image')
 
@@ -63,6 +68,9 @@ const createCard = ({ name, link, likes, _id, owner }) => {
       userId: userInfo.getUserId(),
       handleCardClick: () => {
         popupWithImage.open({ name, link })
+      },
+      handleRemoveCard: () => {
+        popupConfirm.open(card)
       },
       handleLikeCard: () => {
         const stateLike = card.getLikes().find((owner) => owner._id === userInfo.getUserId())
@@ -94,30 +102,24 @@ const createCard = ({ name, link, likes, _id, owner }) => {
   return card.generateCard()
 }
 
-// const cardList = new Section(
-//   {
-//     items: initialCards,
-//     renderer: (item) => {
-//       cardList.addItem(createCard(item))
-//     },
-//   },
-//   '.elements'
-// )
-
-// cardList.renderItems()
 /* ************************************** */
 
 //=====================
-//FIXME: Добавление карточки
+//NOTE: Добавление карточки
 //=====================
 const popupWithAddCard = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
-  submitHandler: ({ name, link }) => {
-    cardList.addItem(createCard({ name, link }))
-
-    popupWithAddCard.close()
+  submitHandler: (data) => {
+    api
+      .createCard(data)
+      .then((res) => {
+        console.log(createCard(res))
+        cardList.addItem(createCard(res))
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   },
-
   formActivation: () => {
     valadationAddCard.cleanUpForm()
   },
@@ -126,6 +128,28 @@ const popupWithAddCard = new PopupWithForm({
 popupWithAddCard.setEventListeners()
 
 buttonAddCard.addEventListener('click', popupWithAddCard.open.bind(popupWithAddCard))
+/* ************************************** */
+
+//=====================
+//FIXME: Удаление карточки
+//=====================
+const popupConfirm = new PopupConfirm({
+  popupSelector: '.popup_type_confirm',
+  submitHandler: (card) => {
+    api
+      .removeCard(card.getId())
+      .then(() => {
+        card.remove()
+        popupConfirm.close()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
+})
+
+popupConfirm.setEventListeners()
+
 /* ************************************** */
 
 //=====================

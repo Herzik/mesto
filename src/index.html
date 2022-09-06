@@ -93,7 +93,7 @@
             id="avatar-link"
             placeholder="Ссылка на картинку"
             name="avatar"
-            class="popup__input"
+            class="popup__input popup__input_no-margin-top"
             required
           />
           <span class="avatar-link-error popup__input-error"></span>
@@ -110,14 +110,7 @@
         <button class="popup__close"></button>
         <h3 class="popup__title">Вы уверены?</h3>
 
-        <form
-          name="update_avatar"
-          action="form"
-          class="popup__form popup__form_type_update_avatar"
-          novalidate
-        >
-          <button type="submit" class="popup__button">Да</button>
-        </form>
+        <button type="submit" class="popup__button popup__button-confirm">Да</button>
       </div>
     </div>
 

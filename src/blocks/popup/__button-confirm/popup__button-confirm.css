@@ -1,0 +1,12 @@
+.popup__button-confirm {
+  width: 80%;
+  margin-top: 75px;
+  margin-left: 22px;
+}
+
+@media screen and (min-width: 1024px) {
+  .popup__button-confirm {
+    margin-top: 54px;
+    margin-left: 36px;
+  }
+}

@@ -119,5 +119,15 @@ export default class Api {
     })
   }
 
-  deleteCard() {}
+  removeCard(idCard) {
+    return fetch(`${this._url}/cards/${idCard}/`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      return Promise.reject(`Ошибка ${res.status}`)
+    })
+  }
 }

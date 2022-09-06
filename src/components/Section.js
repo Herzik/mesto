@@ -6,6 +6,10 @@ export default class Section {
     this._container = document.querySelector(containerSelector)
   }
 
+  setRendererItems(items) {
+    this._renderedItems = items
+  }
+
   addItem(element) {
     this._container.prepend(element)
   }
