@@ -92,7 +92,11 @@ export default class Api {
       return Promise.reject(`Ошибка ${res.status}`)
     })
   }
+  /* ************************************** */
 
+  //=====================
+  //NOTE: Ставим лайк
+  //=====================
   setLike(idCard) {
     return fetch(`${this._url}/cards/${idCard}/likes`, {
       method: 'PUT',
@@ -105,6 +109,11 @@ export default class Api {
       return Promise.reject(`Ошибка ${res.status}`)
     })
   }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Убираем лайк
+  //=====================
 
   removeLike(idCard) {
     return fetch(`${this._url}/cards/${idCard}/likes`, {
@@ -118,6 +127,11 @@ export default class Api {
       return Promise.reject(`Ошибка ${res.status}`)
     })
   }
+  /* ************************************** */
+
+  //=====================
+  //NOTE: Удаляем карточку
+  //=====================
 
   removeCard(idCard) {
     return fetch(`${this._url}/cards/${idCard}/`, {
@@ -131,3 +145,4 @@ export default class Api {
     })
   }
 }
+/* ************************************** */

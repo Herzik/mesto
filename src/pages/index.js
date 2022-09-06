@@ -113,7 +113,6 @@ const popupWithAddCard = new PopupWithForm({
     api
       .createCard(data)
       .then((res) => {
-        console.log(createCard(res))
         cardList.addItem(createCard(res))
       })
       .catch((err) => {
