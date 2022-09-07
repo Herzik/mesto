@@ -141,6 +141,7 @@ buttonAddCard.addEventListener('click', popupWithAddCard.open.bind(popupWithAddC
 const popupConfirm = new PopupConfirm({
   popupSelector: '.popup_type_confirm',
   submitHandler: (card) => {
+    popupConfirm.setTextButton('Удаляется...')
     api
       .removeCard(card.getId())
       .then(() => {
@@ -149,6 +150,9 @@ const popupConfirm = new PopupConfirm({
       })
       .catch((err) => {
         console.log(err)
+      })
+      .finally(() => {
+        popupConfirm.defaultTextButton()
       })
   },
 })
