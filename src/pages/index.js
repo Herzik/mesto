@@ -15,7 +15,7 @@ import Card from '../components/Card.js'
 import Section from '../components/Section.js'
 import FormValidator from '../components/FormValidator.js'
 import PopupWithImage from '../components/PopupWithImage.js'
-import PopupWithForm from '../components/popupWithForm.js'
+import PopupWithForm from '../components/PopupWithForm.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 import PopupConfirm from '../components/PopupConfirm.js'
@@ -41,13 +41,15 @@ const cardList = new Section(
 //=====================
 //NOTE: Запуск инициализации карточек и профиля
 //=====================
-Promise.all([api.getProfile(), api.getInitialCards()]).then(([data, cards]) => {
-  userInfo.initialize(data)
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([data, cards]) => {
+    userInfo.setUserInfo(data)
 
-  cardList.setRendererItems(cards)
+    cardList.setRendererItems(cards)
 
-  cardList.renderItems()
-})
+    cardList.renderItems()
+  })
+  .catch((err) => console.log(err))
 /* ************************************** */
 
 //=====================
@@ -81,18 +83,14 @@ const createCard = ({ name, link, likes, _id, owner }) => {
             .then((res) => {
               card.renderLikes(res.likes)
             })
-            .catch((err) => {
-              console.log(err)
-            })
+            .catch((err) => console.log(err))
         } else {
           api
             .removeLike(card.getId())
             .then((res) => {
               card.renderLikes(res.likes)
             })
-            .catch((err) => {
-              console.log(err)
-            })
+            .catch((err) => console.log(err))
         }
       },
     },
@@ -110,7 +108,7 @@ const createCard = ({ name, link, likes, _id, owner }) => {
 const popupWithAddCard = new PopupWithForm({
   popupSelector: '.popup_type_add-card',
   submitHandler: (data) => {
-    popupWithAddCard.setTextButton('Сохранение...')
+    popupWithAddCard.renderLoading(true)
 
     api
       .createCard(data)
@@ -118,11 +116,9 @@ const popupWithAddCard = new PopupWithForm({
         cardList.addItem(createCard(res))
         popupWithAddCard.close()
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      .catch((err) => console.log(err))
       .finally(() => {
-        popupWithAddCard.defaultTextButton()
+        popupWithAddCard.renderLoading(false)
       })
   },
   formActivation: () => {
@@ -136,23 +132,21 @@ buttonAddCard.addEventListener('click', popupWithAddCard.open.bind(popupWithAddC
 /* ************************************** */
 
 //=====================
-//FIXME: Удаление карточки
+//NOTE: Удаление карточки
 //=====================
 const popupConfirm = new PopupConfirm({
   popupSelector: '.popup_type_confirm',
   submitHandler: (card) => {
-    popupConfirm.setTextButton('Удаляется...')
+    popupConfirm.renderLoading(true)
     api
       .removeCard(card.getId())
       .then(() => {
         card.remove()
         popupConfirm.close()
       })
-      .catch((err) => {
-        console.log(err)
-      })
+      .catch((err) => console.log(err))
       .finally(() => {
-        popupConfirm.defaultTextButton()
+        popupConfirm.renderLoading(false)
       })
   },
 })
@@ -186,7 +180,7 @@ const userInfo = new UserInfo({
 const popupWithProfile = new PopupWithForm({
   popupSelector: '.popup_type_profile',
   submitHandler: (data) => {
-    popupWithProfile.setTextButton('Сохранение...')
+    popupWithProfile.renderLoading(true)
 
     api
       .setProfile(data)
@@ -197,7 +191,7 @@ const popupWithProfile = new PopupWithForm({
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        popupWithProfile.defaultTextButton()
+        popupWithProfile.renderLoading(false)
       })
   },
   formActivation: () => {
@@ -221,12 +215,12 @@ profileEditButton.addEventListener('click', popupWithProfile.open.bind(popupWith
 const popupAvatarUpdate = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   submitHandler: (data) => {
+    popupAvatarUpdate.setTextButton('Сохранение...')
+
     api
       .updateAvatar(data)
       .then((data) => {
-        popupAvatarUpdate.setTextButton('Сохранение...')
-
-        userInfo.updateAvatar(data)
+        userInfo.setUserInfo(data)
 
         popupAvatarUpdate.close()
       })

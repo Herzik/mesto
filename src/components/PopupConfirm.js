@@ -1,6 +1,6 @@
 import Popup from './Popup.js'
 
-export default class popupConfirm extends Popup {
+export default class PopupConfirm extends Popup {
   constructor({ popupSelector, submitHandler }) {
     super(popupSelector)
     this._buttonSubmit = this._popup.querySelector('.popup__button')
@@ -9,16 +9,12 @@ export default class popupConfirm extends Popup {
     this._submitHandlerClick = () => {}
   }
 
-  setTextButton(text) {
-    this._buttonSubmit.textContent = text
-  }
-
-  defaultTextButton() {
-    this._buttonSubmit.textContent = this._defaultTextButton
-  }
-
-  setEventListeners() {
-    super.setEventListeners()
+  renderLoading(isLoading, loadingText = 'Удаляется...') {
+    if (isLoading) {
+      this._buttonSubmit.textContent = loadingText
+    } else {
+      this._buttonSubmit.textContent = this._defaultTextButton
+    }
   }
 
   open(item) {

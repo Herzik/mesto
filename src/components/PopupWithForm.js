@@ -9,11 +9,10 @@ export default class PopupWithForm extends Popup {
 
     this._submitHandler = submitHandler
     this._formActivation = formActivation
+    this._inputList = this._form.querySelectorAll('.popup__input')
   }
 
   getInputValues() {
-    this._inputList = this._form.querySelectorAll('.popup__input')
-
     this._formValues = {}
 
     this._inputList.forEach((input) => {
@@ -23,12 +22,12 @@ export default class PopupWithForm extends Popup {
     return this._formValues
   }
 
-  setTextButton(text) {
-    this._buttonSubmit.textContent = text
-  }
-
-  defaultTextButton() {
-    this._buttonSubmit.textContent = this._defaultTextButton
+  renderLoading(isLoading, loadingText = 'Сохранение...') {
+    if (isLoading) {
+      this._buttonSubmit.textContent = loadingText
+    } else {
+      this._buttonSubmit.textContent = this._defaultTextButton
+    }
   }
 
   setEventListeners() {

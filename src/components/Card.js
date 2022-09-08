@@ -24,21 +24,28 @@ export default class Card {
     this._handleRemoveCard = handleRemoveCard
 
     this._cardSelector = cardSelector
+
+    this._element = this._getTemplate()
+    this._imageElement = this._element.querySelector('.element__image')
+    this._nameElement = this._element.querySelector('.element__name')
+    this._likeElement = this._element.querySelector('.element__like')
+    this._countLikeElement = this._element.querySelector('.element__count-like')
+    this._removeElement = this._element.querySelector('.element__delete')
   }
 
   //=====================
   //NOTE: Слушатели событий
   //=====================
-  _setEventListeners() {
-    this._element.querySelector('.element__image').addEventListener('click', () => {
+  _setEventListeners = () => {
+    this._imageElement.addEventListener('click', () => {
       this._handleCardClick()
     })
 
-    this._element.querySelector('.element__like').addEventListener('click', () => {
+    this._likeElement.addEventListener('click', () => {
       this._handleLikeCard()
     })
 
-    this._element.querySelector('.element__delete').addEventListener('click', () => {
+    this._removeElement.addEventListener('click', () => {
       this._handleRemoveCard()
     })
   }
@@ -48,7 +55,7 @@ export default class Card {
   //NOTE: Получаем количество лайков
   //=====================
   _setCountLikes() {
-    this._element.querySelector('.element__count-like').textContent = this._likes.length
+    this._countLikeElement.textContent = this._likes.length
   }
   /* ************************************** */
 
@@ -83,13 +90,13 @@ export default class Card {
   //=====================
   //NOTE: Рендерим лайки
   //=====================
-  renderLikes(likes) {
+  renderLikes = (likes) => {
     this.setLikes(likes)
     this._setCountLikes()
     if (this._getStateLike()) {
-      this._element.querySelector('.element__like').classList.add('element__like_active')
+      this._likeElement.classList.add('element__like_active')
     } else {
-      this._element.querySelector('.element__like').classList.remove('element__like_active')
+      this._likeElement.classList.remove('element__like_active')
     }
   }
   /* ************************************** */
@@ -118,21 +125,15 @@ export default class Card {
   //NOTE: Генерирует и возвращает карточку
   //=====================
   generateCard() {
-    this._element = this._getTemplate()
     this.renderLikes(this._likes)
     this._setEventListeners()
 
-    const imageElement = this._element.querySelector('.element__image')
-    const nameElement = this._element.querySelector('.element__name')
-
-    const removeElement = this._element.querySelector('.element__delete')
-
-    imageElement.src = this._image
-    imageElement.alt = this._name
-    nameElement.textContent = this._name
+    this._imageElement.src = this._image
+    this._imageElement.alt = this._name
+    this._nameElement.textContent = this._name
 
     if (this._ownerId != this._userId) {
-      removeElement.remove()
+      this._removeElement.remove()
     }
 
     return this._element

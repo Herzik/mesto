@@ -7,9 +7,9 @@ export default class UserInfo {
   }
 
   //=====================
-  //NOTE: Инициализация профиля
+  //NOTE: Устанавливаем информацию о пользователе
   //=====================
-  initialize({ name, about, avatar, _id }) {
+  setUserInfo({ name, about, avatar, _id }) {
     this._profileNameElement.textContent = name
     this._profileDescriptionElement.textContent = about
     this._profileAvatarElement.src = avatar
@@ -34,24 +34,6 @@ export default class UserInfo {
       name: this._profileNameElement.textContent,
       description: this._profileDescriptionElement.textContent,
     }
-  }
-  /* ************************************** */
-
-  //=====================
-  //NOTE: Устанавливаем информацию о пользователе
-  //=====================
-  setUserInfo({ name, about }) {
-    this._profileNameElement.textContent = name
-    this._profileDescriptionElement.textContent = about
-  }
-  /* ************************************** */
-
-  //=====================
-  //NOTE: Обновляем аватар пользователя
-  //=====================
-  updateAvatar({ name, avatar }) {
-    this._profileAvatarElement.src = avatar
-    this._profileAvatarElement.alt = name
   }
   /* ************************************** */
 }
