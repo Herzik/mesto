@@ -215,7 +215,7 @@ profileEditButton.addEventListener('click', popupWithProfile.open.bind(popupWith
 const popupAvatarUpdate = new PopupWithForm({
   popupSelector: '.popup_type_avatar',
   submitHandler: (data) => {
-    popupAvatarUpdate.setTextButton('Сохранение...')
+    popupAvatarUpdate.renderLoading(true)
 
     api
       .updateAvatar(data)
@@ -226,12 +226,12 @@ const popupAvatarUpdate = new PopupWithForm({
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        popupAvatarUpdate.defaultTextButton()
+        popupAvatarUpdate.renderLoading(false)
       })
   },
 
   formActivation: () => {
-    valadationAddCard.cleanUpForm()
+    validationUpdateAvatar.cleanUpForm()
   },
 })
 
